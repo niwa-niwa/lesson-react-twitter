@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.header{
+    height: 48px;
+    background-color: lightblue;
+    box-shadow: -1px -1px 5px 0;
+}
+
+.header__wrapper{
+    position:fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 70px;
+}
+
+.header__inner{
+    position: relative;
+    display: flex;
+}
+
+.header__inner img{
+    width: 48px;
+}
+
+.header__nav{
+    position:absolute;
+    right: 0;
+    display: flex;
+}
+
+.header__nav div{
+    margin: 10px;
+}

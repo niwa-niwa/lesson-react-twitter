@@ -1,10 +1,24 @@
 import React from 'react'
 
+import '../scss/Header.scss'
+
+import TwitterIcon from '../img/twitter-icon.png'
 
 class Header extends React.Component{
     render(){
         return (
-            <div>Headerからです</div>
+            <header className="header">
+                <div className="header__wrapper">
+                    <div className="header__inner">
+                        <img src={TwitterIcon} alt=""/>
+                        <nav className="header__nav">
+                            <div>menu1</div>
+                            <div>menu2</div>
+                            <div>menu3</div>
+                        </nav>
+                    </div>
+                </div>
+            </header>
         )
     }
 }
