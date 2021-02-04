@@ -6,7 +6,7 @@ import Main from './Main'
 import RightNav from './RightNav'
 import Footer from './Footer'
 
-import '../scss/style.scss'
+import '../scss/App.scss'
 
 
 class App extends React.Component{
