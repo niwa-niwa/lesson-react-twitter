@@ -6,12 +6,13 @@ import Main from './Main'
 import RightNav from './RightNav'
 import Footer from './Footer'
 
+import '../scss/style.scss'
+
 
 class App extends React.Component{
     render(){
         return (
             <div>
-                <div>Appからです</div>
                 <Header />
                 <SideNav />
                 <Main />
