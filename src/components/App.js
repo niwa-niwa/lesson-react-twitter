@@ -4,6 +4,7 @@ import SideNav from './SideNav'
 import Header from './Header'
 import Main from './Main'
 import RightNav from './RightNav'
+import Footer from './Footer'
 
 
 class App extends React.Component{
@@ -15,6 +16,7 @@ class App extends React.Component{
                 <SideNav />
                 <Main />
                 <RightNav />
+                <Footer />
             </div>
         )
     }
