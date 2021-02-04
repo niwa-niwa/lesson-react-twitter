@@ -18,9 +18,17 @@ body{
     height: 100%;
 }
 
+.content-wrapper{
+    width: 100%;
+    display: grid;
+    place-content: center;
+}
 .content{
     position: relative;
+    width: 100%;
+    max-width: 1080px;
     height: 100vh;
-    padding-top: 48px;
-
+    padding: 48px 0 0 0;
+    display:flex;
+    flex-wrap: wrap;
 }
