@@ -1,10 +1,14 @@
 import React from 'react'
 
+import '../scss/RightNav.scss'
+
 
 class RightNav extends React.Component{
     render(){
         return (
-            <div>RightNavからです</div>
+            <div className="right-nav">
+                RightNavからです
+            </div>
         )
     }
 }
