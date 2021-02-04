@@ -14,10 +14,12 @@ class App extends React.Component{
         return (
             <div>
                 <Header />
-                <SideNav />
-                <Main />
-                <RightNav />
-                <Footer />
+                <div className="content">
+                    <SideNav />
+                    <Main />
+                    <RightNav />
+                    <Footer />
+                </div>
             </div>
         )
     }
