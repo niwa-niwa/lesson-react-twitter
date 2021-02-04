@@ -1,10 +1,14 @@
 import React from 'react'
 
+import '../scss/Footer.scss'
+
 
 class Footer extends React.Component{
     render(){
         return (
-            <div>Footerからです</div>
+            <footer>
+                <p>niwatter.com</p>
+            </footer>
         )
     }
 }
