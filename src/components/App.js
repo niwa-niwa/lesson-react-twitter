@@ -15,8 +15,8 @@ class App extends React.Component{
             <div>
                 <Header />
 
-                <div className="content-wrapper">
-                    <div className="content">
+                <div className="content">
+                    <div className="content__inner">
                         <SideNav />
                         <Main />
                         <RightNav />

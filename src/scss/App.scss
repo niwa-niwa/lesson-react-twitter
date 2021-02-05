@@ -5,6 +5,8 @@ https://9elements.com/bem-cheat-sheet/#navigation
 */
 
 @import url(https://unpkg.com/ress/dist/ress.min.css);
+@import '_Const.scss';
+
 
 * {
     box-sizing: border-box;
@@ -13,22 +15,25 @@ https://9elements.com/bem-cheat-sheet/#navigation
 html{
     height: 100%;
 }
+
 body{
     position:relative;
     height: 100%;
 }
 
-.content-wrapper{
+.content{
     width: 100%;
     display: flex;
     justify-content: center;
-}
-.content{
-    position: relative;
-    width: 100%;
-    max-width: 1280px;
-    height: 100vh;
-    padding: 48px 0 0 0;
-    display:flex;
-    flex-wrap: wrap;
+    
+    &__inner{
+        position: relative;
+        width: 100%;
+        max-width: $max_width;
+        height: 100vh;
+        padding: 48px 0 0 0;
+        display:flex;
+        flex-wrap: wrap;
+    }
+    
 }

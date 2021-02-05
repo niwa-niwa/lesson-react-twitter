@@ -1,34 +1,38 @@
 @charset "UTF-8";
 
-// .header{
-// }
+@import '_Const.scss';
 
-.header__wrapper{
-    position:fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 48px;
-    box-shadow: -1px -1px 5px 0;
-    background-color: lightblue;
-    z-index: 100;
-}
 
-.header__inner{
-    position: relative;
-    display: flex;
-}
-
-.header__inner img{
-    width: 48px;
-}
-
-.header__nav{
-    position:absolute;
-    right: 0;
-    display: flex;
-}
-
-.header__nav div{
-    margin: 10px;
+.header{
+    
+    &__wrapper{
+        position:fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: $header_height;
+        box-shadow: -1px -1px 5px 0;
+        background-color: $main_color;
+        z-index: 10;
+    }
+    
+    &__inner{
+        position: relative;
+        display: flex;
+        
+        img{
+            width: $header_height;
+        }
+    }
+    
+    &__nav{
+        position:absolute;
+        right: 0;
+        display: flex;
+        
+        div{
+            margin: 10px;
+        }
+    }
+    
 }
