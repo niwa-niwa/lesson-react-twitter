@@ -2,7 +2,9 @@
 
 @import '_Const.scss';
 
-
+/**
+* SP Style
+*/
 .header{
     
     &__wrapper{
@@ -26,6 +28,10 @@
     }
     
     &__nav{
+        display: none;
+    }
+
+    &__hamburger{
         position:absolute;
         right: 0;
         display: flex;
@@ -35,4 +41,22 @@
         }
     }
     
+}
+
+
+/**
+* PC Style
+*/
+@media screen and (min-width:$pc_width) { 
+    .header{
+        &__nav{
+            position:absolute;
+            right: 0;
+            display: flex;
+            
+            div{
+                margin: 10px;
+            }
+        }
+    }
 }

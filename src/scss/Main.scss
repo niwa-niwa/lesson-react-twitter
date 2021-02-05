@@ -1,19 +1,33 @@
 @charset "UTF-8";
 
+@import '_Const.scss';
+
+
+/**
+* SP Style
+*/
 .main{
     height: 100%;
-    width:30%;
+    width:85%;
     background-color: beige;
 }
 
-@media screen and (min-width:1280px){
 
+/**
+* Table Style
+*/
+@media screen and (min-width:$tablet_width){
+    .main{
+        width: 80%;
+    }
 }
 
-@media screen and (min-width:1003px) and ( max-width:1279px){
 
-}
-
-@media screen and (min-width:1002px) { 
-
+/**
+* PC Style
+*/
+@media screen and (min-width:$pc_width) { 
+    .main{
+        width: 55%;
+    }
 }

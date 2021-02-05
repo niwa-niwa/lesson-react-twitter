@@ -1,19 +1,34 @@
 @charset "UTF-8";
 
+@import '_Const.scss';
+
+
+/**
+* SP Style
+*/
 .right-nav{
-    height: 100%;
-    width: 30%;
-    background-color: aquamarine;
+    display: none;
 }
 
-@media screen and (min-width:1280px){
 
+/**
+* Table Style
+*/
+@media screen and (min-width:$tablet_width){
+    .right-nav{
+        display: none;
+    }
 }
 
-@media screen and (min-width:1003px) and ( max-width:1279px){
 
-}
+/**
+* PC Style
+*/
+@media screen and (min-width:$pc_width) { 
+    .right-nav{
+        display: block;
+        width: 25%;
+        background-color: grey;
 
-@media screen and (min-width:1002px) { 
-
+    }
 }
