@@ -28,7 +28,7 @@ body{
     
     &__inner{
         position: relative;
-        height: 100vh;
+        height: 100%;
         width: 100%;
         max-width: $max_width;
         padding: $header_height 0 $footer_height 0;
