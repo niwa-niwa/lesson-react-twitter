@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+@import '../_Const.scss';
+
+.twitter-card{
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 8px 16px;
+    border: #{lighten($columns_color, 2%)} 1px solid;
+
+    &__left{
+        padding-right: 16px;
+        img{
+            width: 45px;
+            border-radius: 50%;
+        }
+    }
+
+    &__main{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .username{
+            font-size: 12px;
+            font-weight: bold;
+            padding-right:8px ;
+        }
+
+        .date{
+            font-size: 8px;
+        }
+
+        .tweet{
+            font-size: 14px;
+        }
+    }
+}
