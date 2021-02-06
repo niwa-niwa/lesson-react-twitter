@@ -8,7 +8,6 @@
     position: relative;
     height: 100%;
     width: map-get($map: $sp-width-map, $key:side-nav );
-    background-color: burlywood;
 
     @include media(m){
         width: map-get($map: $tablet-width-map, $key:side-nav );
@@ -24,16 +23,15 @@
         height: 100%;
         flex-direction: column;
         font-size: 8px;
-        background-color: burlywood;
         padding: 8px;
         width: map-get($map: $sp-width-map, $key:side-nav );
+        background-color: lighten($columns_color,10%);
 
         div{
             margin: 4px;
         }
 
         @include media(m){
-            font-size: 8px;
             width: map-get($map: $tablet-width-map, $key:side-nav );
         }
 

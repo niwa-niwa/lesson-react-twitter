@@ -5,7 +5,9 @@
 
 .right-nav{
     // SP Style
+    position:relative;
     display: none;
+    background-color: darken($columns_color, 5%);
 
     // Table Style
     @include media(m){
@@ -15,16 +17,24 @@
     // PC Style
     @include media(l){
         display: block;
+        width: map-get($map: $tablet-width-map, $key:right-nav );
+    }
+    @include media(ll){
+        display: block;
         width: map-get($map: $pc-width-map, $key:right-nav );
-        background-color: grey;
     }
 
     &__inner{
         @include media(l){
             position: fixed;
+            width: map-get($map: $tablet-width-map, $key:right-nav );
+            height: 100%;
+        }
+
+        @include media(ll){
+            position: fixed;
             width: map-get($map: $pc-width-map, $key:right-nav );
             height: 100%;
-            background-color: grey;
         }
     }
 

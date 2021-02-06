@@ -1,16 +1,19 @@
 @charset "UTF-8";
 
-$main_color:lightblue;
+$layout_color:lightblue;
+$columns_color:#8EB8FF;
 
 $header_height:48px;
 $footer_height:16px;
 
 $max_width:1280px;
+$large_width:1080px;
 $pc_width:769px;
 $tablet_width:481px;
 $sp_width:480px;
 
 $break-points: (
+    ll:"screen and (min-width:#{$large_width})",
     l:"screen and (min-width:#{$pc_width})",
     m:"screen and (min-width:#{$tablet_width})",
     s:"screen and (min-width:#{$sp_width})",
@@ -31,7 +34,7 @@ $sp-width-map:(
 $tablet-width-map:(
     side-nav:100px,
     main:86%,
-    right-nav:0,
+    right-nav:240px,
 );
 
 $pc-width-map:(
