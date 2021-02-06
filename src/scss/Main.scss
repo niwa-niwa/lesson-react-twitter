@@ -7,20 +7,22 @@
     
     // SP Style
     height: 100%;
-    width: map-get($map: $sp-width-map, $key:main );
+    // width: map-get($map: $sp-width-map, $key:main );
+    flex-grow: 1;
+    flex-shrink: 1;
     background-color: beige;
 
     // Table Style
     @include media(m){
         &{
-            width: map-get($map: $tablet-width-map, $key:main );
+            // width: map-get($map: $tablet-width-map, $key:main );
         }
     }
 
     // PC Style
     @include media(l) { 
         &{
-            width: map-get($map: $pc-width-map, $key:main );
+            // width: map-get($map: $pc-width-map, $key:main );
         }
     }
 
