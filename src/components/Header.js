@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import '../scss/Header.scss'
 
@@ -10,7 +11,9 @@ class Header extends React.Component{
             <header className="header">
                 <div className="header__wrapper">
                     <div className="header__inner">
-                        <img src={TwitterIcon} alt=""/>
+                        <Link to="/">
+                            <img src={TwitterIcon} alt=""/>
+                        </Link>
 
                         <nav className="header__nav">
                             <div>menu1</div>

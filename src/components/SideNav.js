@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import '../scss/SideNav.scss'
 
@@ -10,7 +11,7 @@ class SideNav extends React.Component{
                 <div>メニュー2</div>
                 <div>メニュー3</div>
                 <div>メニュー4</div>
-                <div>メニュー5</div>
+                <Link to="/settings">設定</Link>
             </div>
         )
     }
