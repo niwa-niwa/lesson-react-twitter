@@ -3,32 +3,20 @@
 @import '_Const.scss';
 
 
-/**
-* SP Style
-*/
 .right-nav{
+    // SP Style
     display: none;
-}
 
-
-/**
-* Table Style
-*/
-@media screen and (min-width:$tablet_width){
-    .right-nav{
+    // Table Style
+    @include media(m){
         display: none;
     }
-}
 
-
-/**
-* PC Style
-*/
-@media screen and (min-width:$pc_width) { 
-    .right-nav{
+    // PC Style
+    @include media(l){
         display: block;
-        width: 25%;
+        width: map-get($map: $pc-width-map, $key:right-nav );
         background-color: grey;
-
     }
+
 }

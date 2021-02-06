@@ -3,31 +3,25 @@
 @import '_Const.scss';
 
 
-/**
-* SP Style
-*/
 .main{
+    
+    // SP Style
     height: 100%;
-    width:85%;
+    width: map-get($map: $sp-width-map, $key:main );
     background-color: beige;
-}
 
-
-/**
-* Table Style
-*/
-@media screen and (min-width:$tablet_width){
-    .main{
-        width: 80%;
+    // Table Style
+    @include media(m){
+        &{
+            width: map-get($map: $tablet-width-map, $key:main );
+        }
     }
-}
 
-
-/**
-* PC Style
-*/
-@media screen and (min-width:$pc_width) { 
-    .main{
-        width: 55%;
+    // PC Style
+    @include media(l) { 
+        &{
+            width: map-get($map: $pc-width-map, $key:main );
+        }
     }
+
 }

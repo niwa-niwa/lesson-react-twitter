@@ -2,9 +2,39 @@
 
 $main_color:lightblue;
 
+$header_height:48px;
+
 $max_width:1280px;
 $pc_width:769px;
 $tablet_width:481px;
-// $sp_width:480px;
+$sp_width:480px;
 
-$header_height:48px;
+$break-points: (
+    l:"screen and (min-width:#{$pc_width})",
+    m:"screen and (min-width:#{$tablet_width})",
+    s:"screen and (min-width:#{$sp_width})",
+);
+
+@mixin media($break-point) {
+    @media #{map-get($break-points, $break-point)}{
+        @content
+    }
+}
+
+$sp-width-map:(
+    side-nav:15%,
+    main:85%,
+    right-nav:0,
+);
+
+$tablet-width-map:(
+    side-nav:20%,
+    main:80%,
+    right-nav:0,
+);
+
+$pc-width-map:(
+    side-nav:20%,
+    main:55%,
+    right-nav:25%,
+);

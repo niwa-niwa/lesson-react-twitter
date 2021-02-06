@@ -40,15 +40,11 @@
             margin: 10px;
         }
     }
-    
-}
 
-
-/**
-* PC Style
-*/
-@media screen and (min-width:$pc_width) { 
-    .header{
+    /**
+    * PC Style
+    */
+    @media screen and (min-width:$pc_width) { 
         &__nav{
             position:absolute;
             right: 0;
@@ -58,5 +54,10 @@
                 margin: 10px;
             }
         }
+        
+        &__hamburger{
+            display: none;
+        }
     }
+
 }

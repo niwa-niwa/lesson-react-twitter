@@ -3,31 +3,18 @@
 @import '_Const.scss';
 
 
-/**
-* SP Style
-*/
 .side-nav{
+    // SP Style
     height: 100%;
-    width: 15%;
+    width: map-get($map: $sp-width-map, $key:side-nav );
     background-color: burlywood;
-}
 
-
-/**
-* Table Style
-*/
-@media screen and (min-width:$tablet_width){
-    .side-nav{
-        width: 20%;
+    @include media(m){
+        width: map-get($map: $tablet-width-map, $key:side-nav );
     }
-}
-
-
-/**
-* PC Style
-*/
-@media screen and (min-width:$pc_width) { 
-    .side-nav{
-        width: 20%;
+    // PC Style
+    @include media(l){ 
+        width: map-get($map: $pc-width-map, $key:side-nav );
     }
+    
 }
