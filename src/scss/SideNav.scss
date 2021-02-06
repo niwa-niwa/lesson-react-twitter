@@ -5,6 +5,7 @@
 
 .side-nav{
     // SP Style
+    position: relative;
     height: 100%;
     width: map-get($map: $sp-width-map, $key:side-nav );
     background-color: burlywood;
@@ -12,9 +13,32 @@
     @include media(m){
         width: map-get($map: $tablet-width-map, $key:side-nav );
     }
-    // PC Style
     @include media(l){ 
         width: map-get($map: $pc-width-map, $key:side-nav );
+    }
+
+    &__inner{
+        position: fixed;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        font-size: 8px;
+        background-color: burlywood;
+        padding: 8px;
+
+        div{
+            margin: 4px;
+        }
+
+        @include media(m){
+            font-size: 8px;
+            
+        }
+
+        @include media(l){ 
+            font-size: 16px;
+            
+        }
     }
     
 }

@@ -3,6 +3,7 @@
 $main_color:lightblue;
 
 $header_height:48px;
+$footer_height:16px;
 
 $max_width:1280px;
 $pc_width:769px;
@@ -22,19 +23,19 @@ $break-points: (
 }
 
 $sp-width-map:(
-    side-nav:15%,
-    main:85%,
+    side-nav:14%,
+    main:86%,
     right-nav:0,
 );
 
 $tablet-width-map:(
-    side-nav:20%,
-    main:80%,
+    side-nav:14%,
+    main:86%,
     right-nav:0,
 );
 
 $pc-width-map:(
-    side-nav:20%,
-    main:55%,
+    side-nav:12%,
+    main:63%,
     right-nav:25%,
 );

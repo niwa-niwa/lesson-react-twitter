@@ -7,11 +7,16 @@ class SideNav extends React.Component{
     render(){
         return (
             <div className="side-nav">
+                <div className="side-nav__inner">
+
                 <div>メニュー1</div>
                 <div>メニュー2</div>
                 <div>メニュー3</div>
                 <div>メニュー4</div>
-                <Link to="/settings">設定</Link>
+                <div>
+                    <Link to="/settings">設定</Link>
+                </div>
+                </div>
             </div>
         )
     }
