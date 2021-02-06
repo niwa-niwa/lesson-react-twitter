@@ -4,8 +4,7 @@ import history from '../history'
 
 import SideNav from './SideNav'
 import Header from './Header'
-import Main from './Main'
-import RightNav from './RightNav'
+import Root from './Root'
 import Footer from './Footer'
 import Settings from './Settings'
 
@@ -20,10 +19,7 @@ const App = () => {
                     <div className="content__inner">
                         <SideNav />
                         <Switch>
-                            <Route path="/" exact >
-                                <Main />
-                                <RightNav />
-                            </Route>
+                            <Route path="/" exact component={Root} />
                             <Route path="/settings" exact component={Settings} />
                         </Switch>
                     </div>
