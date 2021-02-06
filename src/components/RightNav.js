@@ -7,7 +7,9 @@ class RightNav extends React.Component{
     render(){
         return (
             <div className="right-nav">
-                RightNavからです
+                <div className="right-nav__inner">
+                    RightNavからです
+                </div>
             </div>
         )
     }

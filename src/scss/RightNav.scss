@@ -19,4 +19,13 @@
         background-color: grey;
     }
 
+    &__inner{
+        @include media(l){
+            position: fixed;
+            width: map-get($map: $pc-width-map, $key:right-nav );
+            height: 100%;
+            background-color: grey;
+        }
+    }
+
 }

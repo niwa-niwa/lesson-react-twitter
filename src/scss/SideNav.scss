@@ -13,6 +13,7 @@
     @include media(m){
         width: map-get($map: $tablet-width-map, $key:side-nav );
     }
+
     @include media(l){ 
         width: map-get($map: $pc-width-map, $key:side-nav );
     }
@@ -25,6 +26,7 @@
         font-size: 8px;
         background-color: burlywood;
         padding: 8px;
+        width: map-get($map: $sp-width-map, $key:side-nav );
 
         div{
             margin: 4px;
@@ -32,12 +34,13 @@
 
         @include media(m){
             font-size: 8px;
-            
+            width: map-get($map: $tablet-width-map, $key:side-nav );
         }
 
         @include media(l){ 
             font-size: 16px;
-            
+            width: map-get($map: $pc-width-map, $key:side-nav );
+
         }
     }
     
