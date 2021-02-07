@@ -8,6 +8,7 @@
     position:relative;
     display: none;
     background-color: darken($columns_color, 5%);
+    padding: 8px;
 
     // Table Style
     @include media(m){

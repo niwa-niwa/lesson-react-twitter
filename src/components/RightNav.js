@@ -8,7 +8,7 @@ class RightNav extends React.Component{
         return (
             <div className="right-nav">
                 <div className="right-nav__inner">
-                    RightNavからです
+                    RightNav is a sponsors area
                 </div>
             </div>
         )
