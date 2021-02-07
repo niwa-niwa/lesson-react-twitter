@@ -1,5 +1,7 @@
 import React from 'react'
 
+import TweetForm from './parts/TweetForm'
+
 import '../scss/Main.scss'
 import '../scss/parts/_TwitterCard.scss'
 
@@ -49,6 +51,7 @@ class Main extends React.Component{
     render(){
         return (
             <div className="main">
+                <TweetForm />
                 {this.renderList()}
             </div>
         )
