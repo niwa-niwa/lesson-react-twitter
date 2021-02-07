@@ -11,12 +11,11 @@ import Person from '../img/person-icon.png'
 
 const Main = () => {
 
-
-    const tweets = useSelector((state) => state.tweetsReducer.tweets)
-
+    const { tweets } = useSelector((state) => state.tweetsReducer)
 
     const renderList = () => {
-        return tweets.reverse().map(tweet => {
+
+        return tweets.map(tweet => {
             return (
                 <div className="twitter-card" key={tweet.id}>
                     <div className="twitter-card__left">

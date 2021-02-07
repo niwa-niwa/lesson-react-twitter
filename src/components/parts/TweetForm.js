@@ -1,39 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { setTweet } from '../../stores/tweetsSlice'
 
 import '../../scss/parts/_TweetForm.scss'
 
-class TweetForm extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            value:''
-        }
 
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+const TweetForm = () => {
+
+    const dispatch = useDispatch()
+
+    
+    const [inputTweet, setInputTweet] = useState('')
+
+
+    const handleChange = (event) => {
+        console.log(event.target.value)
+        setInputTweet(event.target.value)
     }
 
-    handleChange(event){
-        console.log('handleChange= ',event.target.value)
-        this.setState({value: event.target.value})
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        dispatch(setTweet(inputTweet))
+        setInputTweet('')
     }
 
-    handleSubmit(event){
-        console.log('handleSubmit= ',event.target.value)
-        this.setState({value: event.target.value})
-    }
 
-    render(){
-        return(
-            <div className="tweet-form">
-                <form className="tweet-form__form" onSubmit={this.handleSubmit}>
-                    <textarea placeholder="write your feel" onChange={this.handleChange} />
-                    <button type="submit" value="Submit">Tweet</button>
-                </form>
-            </div>
-        )
-    }
-
+    return(
+        <div className="tweet-form">
+            <form className="tweet-form__form" onSubmit={handleSubmit}>
+                <textarea placeholder="write your feel" value={inputTweet} onChange={handleChange} />
+                <button type="submit" value="Submit">Tweet</button>
+            </form>
+        </div>
+    )
 }
 
 export default TweetForm

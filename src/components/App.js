@@ -10,6 +10,7 @@ import Settings from './Settings'
 
 import '../scss/App.scss'
 
+import Tweet from './Tweet'
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                         <Switch>
                             <Route path="/" exact component={Root} />
                             <Route path="/settings" exact component={Settings} />
+                            <Route path="/tweet" exact component={Tweet} />
                         </Switch>
                     </div>
                 </div>

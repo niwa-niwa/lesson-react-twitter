@@ -2,27 +2,39 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 // Test data
-const makeTweets = () => {
-    let tweets = []
-    for(let i =1; i<50 ; i++){
-        tweets.push({
-            "id":i,
-            "content":`${i}回目のツイート`,
+// const makeTweets = () => {
+//     let tweets = []
+//     for(let i =1; i<50 ; i++){
+//         tweets.push({
+//             "id":i,
+//             "content":`${i}回目のツイート`,
+//             "created_at":"2020-01-31",
+//             "user":{
+//                 "id":"1",
+//                 "name":"first-user",
+//                 "mail":"abc@example.com",
+//             },
+//         })
+//     }
+//     return tweets
+// }
+
+
+// initial state variables
+const initialState = {
+    tweets:[
+        {
+            "id":1,
+            "content":`1回目のツイート`,
             "created_at":"2020-01-31",
             "user":{
                 "id":"1",
                 "name":"first-user",
                 "mail":"abc@example.com",
-            },
-        })
-    }
-    return tweets
-}
-
-
-// initial state variables
-const initialState = {
-    tweets:[...makeTweets()]
+            }
+        }
+    ]
+    // tweets:[...makeTweets()]
 }
 
 
@@ -33,7 +45,7 @@ const slice = createSlice({
     reducers: { // register actions in reducers
         setTweet: (state, action) => {
             let tweet = {
-                "id":state.tweets.length++,
+                "id":state.tweets.length+2,
                 "content":action.payload,
                 "created_at":"2020-01-31",
                 "user":{
@@ -43,7 +55,6 @@ const slice = createSlice({
                 },
             }
             state.tweets = [...state.tweets, tweet]
-            console.log(state.tweets)
         }
     }
 })

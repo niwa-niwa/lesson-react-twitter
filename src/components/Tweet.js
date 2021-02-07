@@ -1,17 +1,15 @@
-// 未使用
-
-
 import React from 'react'
-import { useSelector } from 'react-redux'
-// import { RootState } from '../stores'
+import { useDispatch } from 'react-redux'
+import { setTweet } from '../stores/tweetsSlice'
 
 const Tweet = () => {
-    const tweet = useSelector((state) => state.tweets.tweets)
-    console.log(tweet)
+    const dispatch = useDispatch()
 
-    return (
-        <div>{tweet}</div>
+    return(
+        <div>
+            <button onClick={ () => dispatch(setTweet("つぶやきを登録"))}>登録</button>
+        </div>
+
     )
 }
-
 export default Tweet
