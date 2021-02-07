@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import TweetForm from './parts/TweetForm'
 
@@ -8,27 +9,14 @@ import '../scss/parts/_TwitterCard.scss'
 import Person from '../img/person-icon.png'
 
 
-class Main extends React.Component{
+const Main = () => {
 
-    makeTweets(){
-        let tweets = []
-        for(let i =1; i<50 ; i++){
-            tweets.push({
-                "id":i,
-                "content":`${i}回目のツイート`,
-                "created_at":"2020-01-31",
-                "user":{
-                    "id":"1",
-                    "name":"first-user",
-                    "mail":"abc@example.com",
-                },
-            })
-        }
-        return tweets
-    }
 
-    renderList(){
-        return this.makeTweets().map(tweet => {
+    const tweets = useSelector((state) => state.tweetsReducer.tweets)
+
+
+    const renderList = () => {
+        return tweets.reverse().map(tweet => {
             return (
                 <div className="twitter-card" key={tweet.id}>
                     <div className="twitter-card__left">
@@ -48,14 +36,15 @@ class Main extends React.Component{
         })
     }
 
-    render(){
-        return (
-            <div className="main">
-                <TweetForm />
-                {this.renderList()}
-            </div>
-        )
-    }
+
+    return (
+        <div className="main">
+            <TweetForm />
+            {renderList()}
+        </div>
+    )
+
 }
+
 
 export default Main
