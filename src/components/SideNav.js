@@ -9,8 +9,12 @@ class SideNav extends React.Component{
             <div className="side-nav">
                 <div className="side-nav__inner">
 
-                <div>menu4</div>
-                <div>menu5</div>
+                <div>
+                    <Link to="/">Twitter</Link>
+                </div>
+                <div>
+                    <Link to="/json">JSON</Link>
+                </div>
                 <div>menu6</div>
                 <div>menu7</div>
                 <div>

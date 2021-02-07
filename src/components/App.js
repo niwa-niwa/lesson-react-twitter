@@ -7,10 +7,9 @@ import Header from './Header'
 import Root from './Root'
 import Footer from './Footer'
 import Settings from './Settings'
+import Json from './Json'
 
 import '../scss/App.scss'
-
-import Tweet from './Tweet'
 
 const App = () => {
     return (
@@ -22,7 +21,7 @@ const App = () => {
                         <Switch>
                             <Route path="/" exact component={Root} />
                             <Route path="/settings" exact component={Settings} />
-                            <Route path="/tweet" exact component={Tweet} />
+                            <Route path="/json" exact component={Json} />
                         </Switch>
                     </div>
                 </div>
