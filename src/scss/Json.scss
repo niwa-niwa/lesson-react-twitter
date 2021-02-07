@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+@import '_Const.scss';
+
+
+.json-main{
+    // SP Style
+    height: 100%;
+    width: 250px;//it's mystery give value something effected just fit layout
+    flex-grow: 1;
+    flex-shrink: 1;
+    background-color: $columns_color;
+
+}
