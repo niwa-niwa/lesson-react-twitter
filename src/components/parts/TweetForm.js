@@ -1,5 +1,6 @@
 import React from 'react'
 
+import '../../scss/parts/_TweetForm.scss'
 
 class TweetForm extends React.Component{
     constructor(props){
@@ -25,8 +26,8 @@ class TweetForm extends React.Component{
     render(){
         return(
             <div className="tweet-form">
-                <form onSubmit={this.handleSubmit}>
-                    <textarea  cols="30" rows="10" placeholder="write your feel" onChange={this.handleChange} />
+                <form className="tweet-form__form" onSubmit={this.handleSubmit}>
+                    <textarea placeholder="write your feel" onChange={this.handleChange} />
                     <button type="submit" value="Submit">Tweet</button>
                 </form>
             </div>
