@@ -32,7 +32,18 @@ const slice = createSlice({
     initialState, // set variables for initialize
     reducers: { // register actions in reducers
         setTweet: (state, action) => {
-            return Object.assign({}, state, { name: action.payload })
+            let tweet = {
+                "id":state.tweets.length++,
+                "content":action.payload,
+                "created_at":"2020-01-31",
+                "user":{
+                    "id":"1",
+                    "name":"first-user",
+                    "mail":"abc@example.com",
+                },
+            }
+            state.tweets = [...state.tweets, tweet]
+            console.log(state.tweets)
         }
     }
 })
