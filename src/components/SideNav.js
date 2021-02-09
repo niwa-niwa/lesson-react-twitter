@@ -15,7 +15,9 @@ class SideNav extends React.Component{
                 <div>
                     <Link to="/json">JSON</Link>
                 </div>
-                <div>menu6</div>
+                <div>
+                    <Link to="/tasks">Tasks</Link>
+                </div>
                 <div>menu7</div>
                 <div>
                     <Link to="/settings">Settings</Link>

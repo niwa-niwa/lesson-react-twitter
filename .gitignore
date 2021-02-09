@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 src/img/*
+
+mock/server/node_modules
+mock/server/db.json
