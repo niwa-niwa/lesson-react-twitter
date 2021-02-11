@@ -11,12 +11,13 @@ const Tasks = () => {
 
     const [tasks] = useTasks([])
 
-
-    // TODO: post a task
-
     // TODO: show a dialog to input a task
     
-    // TODO: rendering tasks in a list
+    // TODO: re-rendering after added a new task
+
+    // TODO: draggable task-card
+
+    // rendering tasks in a list
     const renderingList = () => {
         return (
             tasks.map( (task) => {

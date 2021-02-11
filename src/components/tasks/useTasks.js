@@ -7,6 +7,8 @@ const useTasks = () => {
 
     const [tasks, setTasks] = useState([])
 
+    // TODO: descending sort
+
     useEffect(() => {
         getTasks()
     },[])

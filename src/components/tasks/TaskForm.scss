@@ -3,11 +3,11 @@
 @import '../../scss/Const';
 
 
-.task-form{
+.task-form-wrap{
     // SP Style
     position:relative;
     display: none;
-    background-color: darken($columns_color, 5%);
+    background-color:aliceblue;
     padding: 8px;
 
     // Table Style
@@ -25,18 +25,19 @@
         width: map-get($map: $pc-width-map, $key:task-form );
     }
 
-    &__inner{
-        @include media(l){
-            position: fixed;
-            width: map-get($map: $tablet-width-map, $key:task-form );
-            height: 100%;
-        }
+    // &__inner{
+    //     @include media(l){
+    //         position: fixed;
+    //         width: map-get($map: $tablet-width-map, $key:task-form );
+    //         height: 100%;
+    //     }
 
-        @include media(ll){
-            position: fixed;
-            width: map-get($map: $pc-width-map, $key:task-form );
-            height: 100%;
-        }
-    }
+    //     @include media(ll){
+    //         position: fixed;
+    //         width: map-get($map: $pc-width-map, $key:task-form );
+    //         height: 100%;
+    //     }
+    // }
+
 
 }
