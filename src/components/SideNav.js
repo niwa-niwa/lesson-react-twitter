@@ -8,20 +8,21 @@ class SideNav extends React.Component{
         return (
             <div className="side-nav">
                 <div className="side-nav__inner">
-
-                <div>
-                    <Link to="/">Twitter</Link>
-                </div>
-                <div>
-                    <Link to="/json">JSON</Link>
-                </div>
-                <div>
-                    <Link to="/tasks">Tasks</Link>
-                </div>
-                <div>menu7</div>
-                <div>
-                    <Link to="/settings">Settings</Link>
-                </div>
+                    <div className="inner-wrap">
+                        <div>
+                            <Link to="/">Twitter</Link>
+                        </div>
+                        <div>
+                            <Link to="/json">JSON</Link>
+                        </div>
+                        <div>
+                            <Link to="/tasks">Tasks</Link>
+                        </div>
+                        <div>menu7</div>
+                        <div>
+                            <Link to="/settings">Settings</Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

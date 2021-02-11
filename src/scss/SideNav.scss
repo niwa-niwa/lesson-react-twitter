@@ -6,15 +6,14 @@
 .side-nav{
     // SP Style
     position: relative;
-    height: 100%;
-    width: map-get($map: $sp-width-map, $key:side-nav );
+    margin-right: map-get($map: $sp-width-map, $key:side-nav );
 
     @include media(m){
-        width: map-get($map: $tablet-width-map, $key:side-nav );
+        margin-right: map-get($map: $tablet-width-map, $key:side-nav );
     }
 
     @include media(l){ 
-        width: map-get($map: $pc-width-map, $key:side-nav );
+        margin-right: map-get($map: $pc-width-map, $key:side-nav );
     }
 
     &__inner{
@@ -22,13 +21,13 @@
         display: flex;
         height: 100%;
         flex-direction: column;
-        font-size: 8px;
+        font-size: 12px;
         padding: 8px;
         width: map-get($map: $sp-width-map, $key:side-nav );
         background-color: lighten($columns_color,10%);
 
-        div{
-            margin: 4px;
+        .inner-wrap{
+            width: 100%;
         }
 
         @include media(m){
