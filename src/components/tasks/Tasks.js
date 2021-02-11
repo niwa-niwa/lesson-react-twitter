@@ -1,6 +1,7 @@
 import React from 'react'
 
 import TaskCard from './TaskCard'
+import TaskForm from './TaskForm'
 import useTasks from './useTasks'
 
 import './TaskCard.scss'
@@ -31,6 +32,7 @@ const Tasks = () => {
             <div className="task-list">
                 {renderingList()}
             </div>
+            <TaskForm />
         </div>
     )
 }
