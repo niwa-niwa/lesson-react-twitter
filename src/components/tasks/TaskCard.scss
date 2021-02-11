@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+@import '../../scss/Const';
+
+.task-card{
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 42px;
+    background-color: aliceblue;
+    border-radius: 6px;
+    margin-bottom: 4px;
+
+    & .done{
+        left: 0;
+        width:24px;
+        height:	28px;
+        margin: 0 6px;
+    }
+
+    & .title{
+        font-size: 18px;
+        margin: 0 6px;
+    }
+
+    & .star{
+        position: absolute;
+        right: 0;
+        font-size: 24px;
+        margin: 0 6px;
+    }
+    
+    .strike-line{
+        color: gray;
+        text-decoration-line: line-through;
+    }
+
+}

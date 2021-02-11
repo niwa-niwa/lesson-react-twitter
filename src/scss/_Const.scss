@@ -29,16 +29,19 @@ $sp-width-map:(
     side-nav:70px,
     main:86%,
     right-nav:0,
+    task-form:86%,
 );
 
 $tablet-width-map:(
     side-nav:100px,
     main:86%,
     right-nav:240px,
+    task-form:520px,
 );
 
 $pc-width-map:(
     side-nav:153px,
     main:63%,
     right-nav:320px,
+    task-form:520px,
 );

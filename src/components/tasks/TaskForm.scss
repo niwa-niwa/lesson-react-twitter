@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+@import '../../scss/Const';
+
+
+.task-form-wrap{
+    // SP Style
+    position:relative;
+    display: none;
+    background-color:aliceblue;
+    padding: 8px;
+
+    // Table Style
+    @include media(m){
+        display: none;
+    }
+
+    // PC Style
+    @include media(l){
+        display: block;
+        width: map-get($map: $tablet-width-map, $key:task-form );
+    }
+    @include media(ll){
+        display: block;
+        width: map-get($map: $pc-width-map, $key:task-form );
+    }
+
+    // &__inner{
+    //     @include media(l){
+    //         position: fixed;
+    //         width: map-get($map: $tablet-width-map, $key:task-form );
+    //         height: 100%;
+    //     }
+
+    //     @include media(ll){
+    //         position: fixed;
+    //         width: map-get($map: $pc-width-map, $key:task-form );
+    //         height: 100%;
+    //     }
+    // }
+
+
+}

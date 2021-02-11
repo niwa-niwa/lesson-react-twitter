@@ -1,25 +1,40 @@
 import React from 'react'
 
+import TaskCard from './TaskCard'
+import TaskForm from './TaskForm'
+import useTasks from './useTasks'
+
+import './TaskCard.scss'
+
 
 const Tasks = () => {
 
-
-    // TODO: post a task
-
-    // TODO: post status done to the task
-
-    // TODO: post status star to the task
-
-    // TODO: fetch tasks
+    const [tasks] = useTasks([])
 
     // TODO: show a dialog to input a task
+    
+    // TODO: re-rendering after added a new task
 
-    // TODO: create a task-card
+    // TODO: draggable task-card
 
-    // TODO: rendering tasks in a list
+    // rendering tasks in a list
+    const renderingList = () => {
+        return (
+            tasks.map( (task) => {
+                return(
+                    <TaskCard initialTask={task} key={task.id} />
+                )
+            })
+        )
+    }
 
     return (
-        <div>Task page</div>
+        <div className="task-main">
+            <div className="task-list">
+                {renderingList()}
+            </div>
+            <TaskForm />
+        </div>
     )
 }
 
