@@ -1,3 +1,11 @@
 @charset "UTF-8";
 
-@import '_Const.scss';
+@import '../../scss/Const';
+
+.task-main{
+    
+    .task-list{
+        padding: 12px;
+
+    }
+}

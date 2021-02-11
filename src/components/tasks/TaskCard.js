@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 
+import './Tasks.scss'
+
 
 const TaskCard = ({initialTask}) => {
 
@@ -18,14 +20,14 @@ const TaskCard = ({initialTask}) => {
     // create a task-card
     return(
         <div className="task-card" key={task.id}>
-            <span className="status" onClick={() =>clickDone()}>
-                {task.done ? '完了' : '未完了'}
-            </span>
-            <label htmlFor="">
+            <input className="done" type="checkbox" name="" id="" checked={task.done} onChange={() =>clickDone()} />
+
+            <span className={'title ' + (task.done ? 'strike-line' : '' )} >
                 {task.title}
-            </label>
+            </span>
+
             <span className="star" onClick={() => clickStar()}>
-                {task.star ? '星付き' : '星なし'}
+                {task.star ? '★' : '☆'}
             </span>
         </div>
     )

@@ -2,6 +2,8 @@ import React,{ useState, useEffect } from 'react'
 
 import TaskCard from './TaskCard'
 
+import './TaskCard.scss'
+
 
 const Tasks = () => {
 
@@ -43,10 +45,11 @@ const Tasks = () => {
         )
     }
 
-
     return (
         <div className="task-main">
-            {renderingList()}
+            <div className="task-list">
+                {renderingList()}
+            </div>
         </div>
     )
 }
