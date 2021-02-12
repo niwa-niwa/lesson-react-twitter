@@ -59,15 +59,15 @@ const TaskForm = (initialTask = {
 
                 <label>
                     Title: 
-                    <input id="title" type="text" onChange={handleChange} value={formData.title} />
+                    <input data-testid="title" id="title" type="text" onChange={handleChange} value={formData.title} />
                 </label>
 
                 <span id="star" onClick={handleChange}>
-                    {setFormData.star ? '★' : '☆'}
+                    {formData.star ? '★' : '☆'}
                 </span>
 
                 <br/>
-                <label htmlFor="">
+                <label data-testid="description" htmlFor="">
                     Description <br/>
                     <textarea id="description" onChange={handleChange} value={formData.description}></textarea>
                 </label>
