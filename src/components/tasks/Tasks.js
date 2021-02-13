@@ -4,6 +4,7 @@ import { FormProvider } from "./FormContext"
 import TaskCard from "./TaskCard"
 import TaskForm from "./TaskForm"
 import useTasks from "./useTasks"
+import AddNewButton from "./AddNewButton"
 
 import "./TaskCard.scss"
 
@@ -27,7 +28,7 @@ const Tasks = () => {
     <FormProvider>
       <div className="task-main">
         <div className="task-list">
-          {/*  TODO: have to make new Entry card */}
+          <AddNewButton />
           {renderingList()}
         </div>
         <TaskForm />

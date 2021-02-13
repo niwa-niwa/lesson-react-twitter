@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+@import "../../scss/Const";
+
+.btn--orange,
+div.btn--orange {
+  color: #fff;
+  background-color: #eb6100;
+  text-align: center;
+}
+.btn--orange:hover,
+div.btn--orange:hover {
+  color: #fff;
+  background: #f56500;
+}
+
+div.btn--radius {
+  border-radius: 100vh;
+}
