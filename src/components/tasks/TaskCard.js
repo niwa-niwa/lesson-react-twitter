@@ -8,6 +8,10 @@ const TaskCard = ({ initialTask }) => {
 
   const formContext = useContext(FormContext)
 
+  // TODO: post status of star to update database
+
+  // TODO: post status of done to update database
+
   // Change  status done to the task by click
   const clickDone = () => {
     setTask({ ...task, done: !task.done })
