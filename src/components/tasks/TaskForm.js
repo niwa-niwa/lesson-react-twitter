@@ -28,9 +28,11 @@ const TaskForm = () => {
     event.preventDefault()
 
     if (formData.id === "") {
-      // for new task
+      // for new task and add uuid
+      const uuid = generateUuid()
+
       tasksApi
-        .post("tasks", formData)
+        .post("tasks", { ...formData, id: uuid })
         .then((response) => {
           // initialize formData
           setFormData(initial_task)
@@ -50,8 +52,6 @@ const TaskForm = () => {
         })
     }
   }
-
-  // TODO: Validate the form and added UUID
 
   return (
     <div className="task-form-wrap">
@@ -90,3 +90,23 @@ const TaskForm = () => {
   )
 }
 export default TaskForm
+
+// made UUID
+function generateUuid() {
+  // https://github.com/GoogleChrome/chrome-platform-analytics/blob/master/src/internal/identifier.js
+  // const FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("")
+  for (let i = 0, len = chars.length; i < len; i++) {
+    switch (chars[i]) {
+      case "x":
+        chars[i] = Math.floor(Math.random() * 16).toString(16)
+        break
+      case "y":
+        chars[i] = (Math.floor(Math.random() * 4) + 8).toString(16)
+        break
+      default:
+        break
+    }
+  }
+  return chars.join("")
+}
