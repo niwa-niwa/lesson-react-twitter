@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
-import { FormContext } from "./FormContext"
+import { FormContext, initial_task } from "./FormContext"
 
 import tasksApi from "../../apis/tasks"
 
@@ -33,12 +33,7 @@ const TaskForm = () => {
         .post("tasks", formData)
         .then((response) => {
           // initialize formData
-          setFormData({
-            id: "",
-            title: "",
-            star: false,
-            description: "",
-          })
+          setFormData(initial_task)
         })
         .catch((e) => {
           console.log(e)
@@ -48,12 +43,7 @@ const TaskForm = () => {
       tasksApi
         .patch(`/tasks/${formData.id}`, formData)
         .then((response) => {
-          setFormData({
-            id: "",
-            title: "",
-            star: false,
-            description: "",
-          })
+          setFormData(initial_task)
         })
         .catch((e) => {
           console.log(e)

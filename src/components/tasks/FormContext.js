@@ -1,18 +1,19 @@
 import React, { createContext, useState } from "react"
 
+// default value to task
+export const initial_task = {
+  id: "",
+  title: "",
+  star: false,
+  description: "",
+}
+
 // be called any components
 export const FormContext = createContext()
 
 // this valuable wrap elements in JSX
 export const FormProvider = ({ children }) => {
-  const form_value = {
-    id: "",
-    title: "",
-    star: false,
-    description: "",
-  }
-
-  const [form, setForm] = useState(form_value)
+  const [form, setForm] = useState(initial_task)
   const updateForm = (Form) => setForm({ ...Form })
 
   return (
