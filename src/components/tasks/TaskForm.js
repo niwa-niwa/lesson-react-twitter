@@ -1,19 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useContext, useEffect } from "react"
+import { FormContext } from "./FormContext"
 
 import tasksApi from "../../apis/tasks"
 
 import "./TaskForm.scss"
 
 // post a task
-const TaskForm = (
-  initialTask = {
-    id: "",
-    title: "",
-    star: false,
-    description: "",
-  }
-) => {
-  const [formData, setFormData] = useState(initialTask)
+const TaskForm = () => {
+  const formContext = useContext(FormContext)
+  const [formData, setFormData] = useState(formContext.form)
+
+  useEffect(() => {
+    setFormData(formContext.form)
+  }, [formContext.form])
 
   const handleChange = (event) => {
     if (event.target.id === "star") {
@@ -28,20 +27,38 @@ const TaskForm = (
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    tasksApi
-      .post("tasks", formData)
-      .then((response) => {
-        // initialize formData
-        setFormData({
-          id: "",
-          title: "",
-          star: false,
-          description: "",
+    if (formData.id === "") {
+      // for new task
+      tasksApi
+        .post("tasks", formData)
+        .then((response) => {
+          // initialize formData
+          setFormData({
+            id: "",
+            title: "",
+            star: false,
+            description: "",
+          })
         })
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+        .catch((e) => {
+          console.log(e)
+        })
+    } else {
+      // for update task
+      tasksApi
+        .patch(`/tasks/${formData.id}`, formData)
+        .then((response) => {
+          setFormData({
+            id: "",
+            title: "",
+            star: false,
+            description: "",
+          })
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
   }
 
   // TODO: Validate the form and added UUID

@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { FormContext } from "./FormContext"
 
 import "./Tasks.scss"
 
 const TaskCard = ({ initialTask }) => {
   const [task, setTask] = useState(initialTask)
+
+  const formContext = useContext(FormContext)
 
   // Change  status done to the task by click
   const clickDone = () => {
@@ -13,6 +16,11 @@ const TaskCard = ({ initialTask }) => {
   // Change status star to the task by click
   const clickStar = () => {
     setTask({ ...task, star: !task.star })
+  }
+
+  // pass arguments to the form-input at right pain in page
+  const clickTitle = (task) => {
+    formContext.updateForm(task)
   }
 
   // create a task-card
@@ -27,7 +35,10 @@ const TaskCard = ({ initialTask }) => {
         onChange={() => clickDone()}
       />
 
-      <span className={"title " + (task.done ? "strike-line" : "")}>
+      <span
+        className={"title " + (task.done ? "strike-line" : "")}
+        onClick={() => clickTitle(task)}
+      >
         {task.title}
       </span>
 
