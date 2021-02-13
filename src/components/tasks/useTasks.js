@@ -1,27 +1,25 @@
-import { useState, useEffect} from 'react'
-import tasksApi from '../../apis/tasks'
-
+import { useState, useEffect } from "react";
+import tasksApi from "../../apis/tasks";
 
 // fetch tasks
 const useTasks = () => {
+  const [tasks, setTasks] = useState([]);
 
-    const [tasks, setTasks] = useState([])
+  // TODO: descending sort
 
-    // TODO: descending sort
+  useEffect(() => {
+    getTasks();
+  }, []);
 
-    useEffect(() => {
-        getTasks()
-    },[])
-
-    const getTasks = async () => {
-        try{
-            const {data} = await tasksApi.get('tasks')
-            setTasks(data)
-        }catch(e){
-            console.log(e)
-        }
+  const getTasks = async () => {
+    try {
+      const { data } = await tasksApi.get("tasks");
+      setTasks(data);
+    } catch (e) {
+      console.log(e);
     }
+  };
 
-    return[tasks, setTasks]
-}
-export default useTasks
+  return [tasks, setTasks];
+};
+export default useTasks;
