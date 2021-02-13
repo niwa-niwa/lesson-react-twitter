@@ -1,18 +1,17 @@
-import React from 'react'
+import React from "react"
 
-import Main from './Main'
-import RightNav from './RightNav'
+import Main from "./Main"
+import RightNav from "./RightNav"
 
-
-class Root extends React.Component{
-    render(){
-        return (
-            <React.Fragment>
-                <Main />
-                <RightNav />
-            </React.Fragment>
-        )
-    }
+class Root extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Main />
+        <RightNav />
+      </React.Fragment>
+    )
+  }
 }
 
 export default Root

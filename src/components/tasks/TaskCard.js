@@ -1,36 +1,41 @@
-import React,{useState} from 'react'
+import React, { useState } from "react"
 
-import './Tasks.scss'
+import "./Tasks.scss"
 
+const TaskCard = ({ initialTask }) => {
+  const [task, setTask] = useState(initialTask)
 
-const TaskCard = ({initialTask}) => {
+  // Change  status done to the task by click
+  const clickDone = () => {
+    setTask({ ...task, done: !task.done })
+  }
 
-    const [task, setTask] = useState(initialTask)
+  // Change status star to the task by click
+  const clickStar = () => {
+    setTask({ ...task, star: !task.star })
+  }
 
-    // Change  status done to the task by click
-    const clickDone = () => {
-        setTask({...task, done:!task.done})
-    }
+  // create a task-card
+  return (
+    <div className="task-card" key={task.id}>
+      <input
+        className="done"
+        type="checkbox"
+        name=""
+        id=""
+        checked={task.done}
+        onChange={() => clickDone()}
+      />
 
-    // Change status star to the task by click
-    const clickStar = () => {
-        setTask({...task, star:!task.star})
-    }
+      <span className={"title " + (task.done ? "strike-line" : "")}>
+        {task.title}
+      </span>
 
-    // create a task-card
-    return(
-        <div className="task-card" key={task.id}>
-            <input className="done" type="checkbox" name="" id="" checked={task.done} onChange={() =>clickDone()} />
-
-            <span className={'title ' + (task.done ? 'strike-line' : '' )} >
-                {task.title}
-            </span>
-
-            <span className="star" onClick={() => clickStar()}>
-                {task.star ? '★' : '☆'}
-            </span>
-        </div>
-    )
+      <span className="star" onClick={() => clickStar()}>
+        {task.star ? "★" : "☆"}
+      </span>
+    </div>
+  )
 }
 
 export default TaskCard

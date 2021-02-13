@@ -1,82 +1,87 @@
-import React,{useState} from 'react'
+import React, { useState } from "react"
 
-import tasksApi from '../../apis/tasks'
+import tasksApi from "../../apis/tasks"
 
-import './TaskForm.scss'
-
+import "./TaskForm.scss"
 
 // post a task
-const TaskForm = (initialTask = {
-        id:'',
-        title:'',
-        star:false,
-        description:'',
-    }) => {
+const TaskForm = (
+  initialTask = {
+    id: "",
+    title: "",
+    star: false,
+    description: "",
+  }
+) => {
+  const [formData, setFormData] = useState(initialTask)
 
-
-    const [formData, setFormData] = useState(initialTask)
-
-
-    const handleChange = (event) => {
-
-        if(event.target.id === 'star'){
-            event.target.value = !event.target.value
-        }
-
-        setFormData({...formData, [event.target.id]:event.target.value})
-
-        console.log("handleChange in formData= ",formData)
-
+  const handleChange = (event) => {
+    if (event.target.id === "star") {
+      event.target.value = !event.target.value
     }
 
+    setFormData({ ...formData, [event.target.id]: event.target.value })
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    console.log("handleChange in formData= ", formData)
+  }
 
-        tasksApi.post('tasks', formData).then((response) => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
-            // initialize formData
-            setFormData({
-                id:'',
-                title:'',
-                star:false,
-                description:'',
-            })
-
-        }).catch((e)=>{
-            console.log(e)
+    tasksApi
+      .post("tasks", formData)
+      .then((response) => {
+        // initialize formData
+        setFormData({
+          id: "",
+          title: "",
+          star: false,
+          description: "",
         })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
 
-    }
+  // TODO: Validate the form and added UUID
 
-    // TODO: Validate the form and added UUID
+  // TODO: fixed star-button in the form
 
-    // TODO: fixed star-button in the form
+  return (
+    <div className="task-form-wrap">
+      <form className="task-form" autoComplete="off" onSubmit={handleSubmit}>
+        <label>
+          Title:
+          <input
+            data-testid="title"
+            id="title"
+            type="text"
+            onChange={handleChange}
+            value={formData.title}
+          />
+        </label>
 
-    return(
-        <div className="task-form-wrap">
-            <form className="task-form" autoComplete="off" onSubmit={handleSubmit}>
+        <span id="star" onClick={handleChange}>
+          {formData.star ? "★" : "☆"}
+        </span>
 
-                <label>
-                    Title: 
-                    <input data-testid="title" id="title" type="text" onChange={handleChange} value={formData.title} />
-                </label>
+        <br />
+        <label data-testid="description" htmlFor="">
+          Description <br />
+          <textarea
+            id="description"
+            onChange={handleChange}
+            value={formData.description}
+          ></textarea>
+        </label>
 
-                <span id="star" onClick={handleChange}>
-                    {formData.star ? '★' : '☆'}
-                </span>
-
-                <br/>
-                <label data-testid="description" htmlFor="">
-                    Description <br/>
-                    <textarea id="description" onChange={handleChange} value={formData.description}></textarea>
-                </label>
-
-                <br/>
-                <button type="submit" value="Submit">Add</button>
-
-            </form>
-        </div>
-    )
+        <br />
+        <button type="submit" value="Submit">
+          Add
+        </button>
+      </form>
+    </div>
+  )
 }
 export default TaskForm

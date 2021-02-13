@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
-@import '../../scss/Const';
+@import "../../scss/Const";
 
-.task-main{
-    display: flex;
-    flex-wrap: nowrap;
+.task-main {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+
+  .task-list {
+    padding: 12px;
     width: 100%;
-
-    .task-list{
-        padding: 12px;
-        width: 100%;
-    }
+  }
 }
