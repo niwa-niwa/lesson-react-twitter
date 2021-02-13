@@ -46,8 +46,6 @@ const TaskForm = (
 
   // TODO: Validate the form and added UUID
 
-  // TODO: fixed star-button in the form
-
   return (
     <div className="task-form-wrap">
       <form className="task-form" autoComplete="off" onSubmit={handleSubmit}>
