@@ -4,6 +4,7 @@ import React, { createContext, useState } from "react"
 export const initial_task = {
   id: "",
   title: "",
+  done: false,
   star: false,
   description: "",
 }
