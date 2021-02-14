@@ -14,8 +14,6 @@ const Tasks = () => {
 
   // TODO: show a dialog to input a task
 
-  // TODO: re-rendering after added a new task
-
   // TODO: draggable task-card
 
   // rendering tasks in a list
