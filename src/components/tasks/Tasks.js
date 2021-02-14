@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 
-import { FormProvider } from "./FormContext"
 import { TaskListContext } from "./TaskListContext"
 
 import TaskCard from "./TaskCard"
@@ -24,15 +23,13 @@ const Tasks = () => {
   }
 
   return (
-    <FormProvider>
-      <div className="task-main">
-        <div className="task-list">
-          <AddNewButton />
-          {renderingList()}
-        </div>
-        <TaskForm />
+    <div className="task-main">
+      <div className="task-list">
+        <AddNewButton />
+        {renderingList()}
       </div>
-    </FormProvider>
+      <TaskForm />
+    </div>
   )
 }
 
