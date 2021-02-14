@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from "react"
+import _ from "lodash"
+
 import { FormContext, initial_task } from "./FormContext"
+import { TaskListContext } from "./TaskListContext"
 
 import tasksApi from "../../apis/tasks"
 
@@ -8,6 +11,7 @@ import "./TaskForm.scss"
 // post a task
 const TaskForm = () => {
   const formContext = useContext(FormContext)
+  const taskListContext = useContext(TaskListContext)
   const [formData, setFormData] = useState(formContext.form)
 
   useEffect(() => {
@@ -33,9 +37,11 @@ const TaskForm = () => {
 
       tasksApi
         .post("tasks", { ...formData, id: uuid })
-        .then((response) => {
+        .then(({ data }) => {
           // initialize formData
           setFormData(initial_task)
+          // add new task in taskList
+          taskListContext.setTasks([...taskListContext.tasks, data])
         })
         .catch((e) => {
           console.log(e)
@@ -44,12 +50,22 @@ const TaskForm = () => {
       // for update task
       tasksApi
         .patch(`/tasks/${formData.id}`, formData)
-        .then((response) => {
+        .then(({ data }) => {
           setFormData(initial_task)
+          forceReload(data)
         })
         .catch((e) => {
           console.log(e)
         })
+    }
+
+    // re-rendering task-list forcefully
+    const forceReload = (data) => {
+      const list = [...taskListContext.tasks]
+      const index = _.findIndex(taskListContext.tasks, { id: data.id })
+      list.splice(index, 1, data)
+      taskListContext.setTasks([])
+      taskListContext.setTasks([...list])
     }
   }
 

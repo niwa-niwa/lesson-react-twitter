@@ -10,6 +10,7 @@ import Settings from "./Settings"
 import Json from "./Json"
 import Tasks from "./tasks/Tasks"
 
+import { TaskListProvider } from "./tasks/TaskListContext"
 import "../scss/App.scss"
 
 const App = () => {
@@ -23,7 +24,9 @@ const App = () => {
             <Route path="/" exact component={Root} />
             <Route path="/settings" exact component={Settings} />
             <Route path="/json" exact component={Json} />
-            <Route path="/tasks" exact component={Tasks} />
+            <TaskListProvider>
+              <Route path="/tasks" exact component={Tasks} />
+            </TaskListProvider>
           </Switch>
         </div>
       </div>

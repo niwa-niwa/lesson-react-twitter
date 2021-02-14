@@ -1,15 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
+
 import { FormProvider } from "./FormContext"
+import { TaskListContext } from "./TaskListContext"
 
 import TaskCard from "./TaskCard"
 import TaskForm from "./TaskForm"
-import useTasks from "./useTasks"
 import AddNewButton from "./AddNewButton"
 
 import "./TaskCard.scss"
 
 const Tasks = () => {
-  const [tasks] = useTasks([])
+  const taskListContext = useContext(TaskListContext)
 
   // TODO: show a dialog to input a task
 
@@ -19,7 +20,7 @@ const Tasks = () => {
 
   // rendering tasks in a list
   const renderingList = () => {
-    return tasks.map((task) => {
+    return taskListContext.tasks.map((task) => {
       return <TaskCard initialTask={task} key={task.id} />
     })
   }
