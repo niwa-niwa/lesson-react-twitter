@@ -10,7 +10,11 @@ import Settings from "./Settings"
 import Json from "./Json"
 import Tasks from "./tasks/Tasks"
 
+import { TaskListProvider } from "./tasks/TaskListContext"
+import { FormProvider } from "./tasks/FormContext"
+
 import "../scss/App.scss"
+// TODO : global flush error message card
 
 const App = () => {
   return (
@@ -23,7 +27,11 @@ const App = () => {
             <Route path="/" exact component={Root} />
             <Route path="/settings" exact component={Settings} />
             <Route path="/json" exact component={Json} />
-            <Route path="/tasks" exact component={Tasks} />
+            <TaskListProvider>
+              <FormProvider>
+                <Route path="/tasks" exact component={Tasks} />
+              </FormProvider>
+            </TaskListProvider>
           </Switch>
         </div>
       </div>

@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react";
-import tasksApi from "../../apis/tasks";
+import { useState, useEffect } from "react"
+import tasksApi from "../../apis/tasks"
 
 // fetch tasks
 const useTasks = () => {
-  const [tasks, setTasks] = useState([]);
-
-  // TODO: descending sort
+  const [tasks, setTasks] = useState([])
 
   useEffect(() => {
-    getTasks();
-  }, []);
+    getTasks()
+  }, [])
 
   const getTasks = async () => {
     try {
-      const { data } = await tasksApi.get("tasks");
-      setTasks(data);
+      const { data } = await tasksApi.get("tasks")
+      setTasks(data)
     } catch (e) {
-      console.log(e);
+      console.log(e)
+      // TODO: show error-message with flush
     }
-  };
+  }
 
-  return [tasks, setTasks];
-};
-export default useTasks;
+  return [tasks, setTasks]
+}
+export default useTasks
