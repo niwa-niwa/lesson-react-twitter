@@ -5,6 +5,7 @@ import tasksApi from "../../apis/tasks"
 
 import "./Tasks.scss"
 
+// TODO accordable and editable card
 const TaskCard = ({ initialTask }) => {
   const [task, setTask] = useState(initialTask)
 
@@ -40,6 +41,8 @@ const TaskCard = ({ initialTask }) => {
   const clickTitle = () => {
     formContext.updateForm(task)
   }
+
+  // TODO add a Delete button after done
 
   // create a task-card
   return (

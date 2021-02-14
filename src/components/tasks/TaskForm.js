@@ -24,8 +24,6 @@ const TaskForm = () => {
     }
 
     setFormData({ ...formData, [event.target.id]: event.target.value })
-
-    console.log("handleChange in formData= ", formData)
   }
 
   const handleSubmit = (event) => {
@@ -60,16 +58,18 @@ const TaskForm = () => {
           // TODO: show error-message with flush
         })
     }
-
-    // re-rendering task-list forcefully
-    const forceReload = (data) => {
-      const list = [...taskListContext.tasks]
-      const index = _.findIndex(taskListContext.tasks, { id: data.id })
-      list.splice(index, 1, data)
-      taskListContext.setTasks([])
-      taskListContext.setTasks([...list])
-    }
   }
+
+  // re-rendering task-list forcefully
+  const forceReload = (data) => {
+    const list = [...taskListContext.tasks]
+    const index = _.findIndex(taskListContext.tasks, { id: data.id })
+    list.splice(index, 1, data)
+    taskListContext.setTasks([])
+    taskListContext.setTasks([...list])
+  }
+
+  // TODO made validation
 
   return (
     <div className="task-form-wrap">
