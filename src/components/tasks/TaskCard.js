@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react"
 import { FormContext } from "./FormContext"
 
+import tasksApi from "../../apis/tasks"
+
 import "./Tasks.scss"
 
 const TaskCard = ({ initialTask }) => {
@@ -8,22 +10,34 @@ const TaskCard = ({ initialTask }) => {
 
   const formContext = useContext(FormContext)
 
-  // TODO: post status of star to update database
-
-  // TODO: post status of done to update database
+  // post status of done and star to update database
+  const updateStatus = async (value) => {
+    tasksApi
+      .patch(`tasks/${value.id}`, value)
+      .then(({ data }) => {
+        console.log(data)
+        setTask({ ...data })
+        return true
+      })
+      .catch((e) => {
+        console.log(e)
+        // TODO: show error-message with flush
+        return false
+      })
+  }
 
   // Change  status done to the task by click
   const clickDone = () => {
-    setTask({ ...task, done: !task.done })
+    updateStatus({ ...task, done: !task.done })
   }
 
   // Change status star to the task by click
   const clickStar = () => {
-    setTask({ ...task, star: !task.star })
+    updateStatus({ ...task, star: !task.star })
   }
 
   // pass arguments to the form-input at right pain in page
-  const clickTitle = (task) => {
+  const clickTitle = () => {
     formContext.updateForm(task)
   }
 
@@ -41,7 +55,7 @@ const TaskCard = ({ initialTask }) => {
 
       <span
         className={"title " + (task.done ? "strike-line" : "")}
-        onClick={() => clickTitle(task)}
+        onClick={() => clickTitle()}
       >
         {task.title}
       </span>

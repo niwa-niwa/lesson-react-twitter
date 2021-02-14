@@ -45,6 +45,7 @@ const TaskForm = () => {
         })
         .catch((e) => {
           console.log(e)
+          // TODO: show error-message with flush
         })
     } else {
       // for update task
@@ -56,6 +57,7 @@ const TaskForm = () => {
         })
         .catch((e) => {
           console.log(e)
+          // TODO: show error-message with flush
         })
     }
 

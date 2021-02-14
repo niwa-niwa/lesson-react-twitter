@@ -15,6 +15,7 @@ const useTasks = () => {
       setTasks(data)
     } catch (e) {
       console.log(e)
+      // TODO: show error-message with flush
     }
   }
 

@@ -14,6 +14,7 @@ import { TaskListProvider } from "./tasks/TaskListContext"
 import { FormProvider } from "./tasks/FormContext"
 
 import "../scss/App.scss"
+// TODO : global flush error message card
 
 const App = () => {
   return (
