@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# This App is lesson for React 
+- Hooks
+- Reduxtool kit
+- Axios with Json-Server
+- Drag & Drop Area
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
