@@ -9,9 +9,11 @@ import Footer from "./Footer"
 import Settings from "./Settings"
 import Json from "./Json"
 import Tasks from "./tasks/Tasks"
+import FlushMessage from "./FlushMessage"
 
 import { TaskListProvider } from "./tasks/TaskListContext"
 import { FormProvider } from "./tasks/FormContext"
+import { FlushMessageProvider } from "./FlushMessageContext"
 
 import "../scss/App.scss"
 // TODO : global flush error message card
@@ -19,23 +21,26 @@ import "../scss/App.scss"
 const App = () => {
   return (
     <Router history={history}>
-      <Header />
-      <div className="content">
-        <div className="content__inner">
-          <SideNav />
-          <Switch>
-            <Route path="/" exact component={Root} />
-            <Route path="/settings" exact component={Settings} />
-            <Route path="/json" exact component={Json} />
-            <TaskListProvider>
-              <FormProvider>
-                <Route path="/tasks" exact component={Tasks} />
-              </FormProvider>
-            </TaskListProvider>
-          </Switch>
+      <FlushMessageProvider>
+        <Header />
+        <div className="content">
+          <div className="content__inner">
+            <SideNav />
+            <Switch>
+              <Route path="/" exact component={Root} />
+              <Route path="/settings" exact component={Settings} />
+              <Route path="/json" exact component={Json} />
+              <TaskListProvider>
+                <FormProvider>
+                  <Route path="/tasks" exact component={Tasks} />
+                </FormProvider>
+              </TaskListProvider>
+            </Switch>
+            <FlushMessage />
+          </div>
         </div>
-      </div>
-      <Footer />
+        <Footer />
+      </FlushMessageProvider>
     </Router>
   )
 }
