@@ -3,6 +3,7 @@ import _ from "lodash"
 
 import { FormContext, initial_task } from "./FormContext"
 import { TaskListContext } from "./TaskListContext"
+import { FlushMessageContext } from "../FlushMessageContext"
 
 import tasksApi from "../../apis/tasks"
 
@@ -12,6 +13,7 @@ import "./TaskForm.scss"
 const TaskForm = () => {
   const formContext = useContext(FormContext)
   const taskListContext = useContext(TaskListContext)
+  const flushMessageContext = useContext(FlushMessageContext)
   const [formData, setFormData] = useState(formContext.form)
 
   useEffect(() => {
@@ -40,6 +42,7 @@ const TaskForm = () => {
           setFormData(initial_task)
           // add new task in taskList
           taskListContext.setTasks([...taskListContext.tasks, data])
+          flushMessageContext.setMessages("Added New Task")
         })
         .catch((e) => {
           console.log(e)
@@ -70,6 +73,11 @@ const TaskForm = () => {
   }
 
   // TODO made validation
+
+  // this is for test
+  const onUseRef = () => {
+    flushMessageContext.setMessages("message from flushMessageContext")
+  }
 
   return (
     <div className="task-form-wrap">
@@ -104,6 +112,9 @@ const TaskForm = () => {
           Add
         </button>
       </form>
+      {/* This is for test */}
+      <br />
+      <button onClick={onUseRef}>useRef</button>
     </div>
   )
 }

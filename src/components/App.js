@@ -9,14 +9,12 @@ import Footer from "./Footer"
 import Settings from "./Settings"
 import Json from "./Json"
 import Tasks from "./tasks/Tasks"
-import FlushMessage from "./FlushMessage"
 
 import { TaskListProvider } from "./tasks/TaskListContext"
 import { FormProvider } from "./tasks/FormContext"
 import { FlushMessageProvider } from "./FlushMessageContext"
 
 import "../scss/App.scss"
-// TODO : global flush error message card
 
 const App = () => {
   return (
@@ -36,7 +34,6 @@ const App = () => {
                 </FormProvider>
               </TaskListProvider>
             </Switch>
-            <FlushMessage />
           </div>
         </div>
         <Footer />

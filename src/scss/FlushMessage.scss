@@ -2,6 +2,18 @@
 
 @import "_Const.scss";
 
+/* CSSアニメーションの設定 */
+@keyframes SlideIn {
+  0% {
+    opacity: 0; /*初期状態では透明に*/
+    transform: translateX(64px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .flush-message {
   position: fixed;
   display: flex;
@@ -17,10 +29,18 @@
   background-color: #ececec;
   border-radius: 8px;
   box-shadow: 0 8px 3px -3px gainsboro;
+  animation: SlideIn 1.6s;
 }
+
 .red {
   background-color: #ffaaaa;
 }
+
 .green {
   background-color: #c7ff90;
+}
+
+.slidOut {
+  transition: opacity 1s;
+  opacity: 0;
 }
