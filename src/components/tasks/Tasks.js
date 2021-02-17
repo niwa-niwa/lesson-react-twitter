@@ -1,4 +1,5 @@
 import React, { useContext } from "react"
+import { DragDropContext, Droppable } from "react-beautiful-dnd"
 
 import { TaskListContext } from "./TaskListContext"
 
@@ -13,12 +14,36 @@ const Tasks = () => {
 
   // TODO: show a dialog to input a task
 
-  // TODO: draggable task-card
+  // re-sorted task-card
+  const reorder = (tasks, startIndex, endIndex) => {
+    const result = Array.from(tasks)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+  }
+
+  // drag function
+  function onDragEnd(result) {
+    if (!result.destination) {
+      return
+    }
+    if (result.destination.index === result.source.index) {
+      return
+    }
+
+    const target_tasks = reorder(
+      taskListContext.tasks,
+      result.source.index,
+      result.destination.index
+    )
+
+    taskListContext.setTasks([...target_tasks])
+  }
 
   // rendering tasks in a list
   const renderingList = () => {
-    return taskListContext.tasks.map((task) => {
-      return <TaskCard initialTask={task} key={task.id} />
+    return taskListContext.tasks.map((task, index) => {
+      return <TaskCard initialTask={task} index={index} key={task.id} />
     })
   }
 
@@ -26,7 +51,16 @@ const Tasks = () => {
     <div className="task-main">
       <div className="task-list">
         <AddNewButton />
-        {renderingList()}
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="taskList">
+            {(provided) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {renderingList()}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
       <TaskForm />
     </div>

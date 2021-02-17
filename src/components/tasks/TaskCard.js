@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react"
-import { FormContext } from "./FormContext"
+import { Draggable } from "react-beautiful-dnd"
 
+import { FormContext } from "./FormContext"
 import tasksApi from "../../apis/tasks"
 
 import "./Tasks.scss"
 
 // TODO accordable and editable card
-const TaskCard = ({ initialTask }) => {
+const TaskCard = ({ initialTask, index }) => {
   const [task, setTask] = useState(initialTask)
-
   const formContext = useContext(FormContext)
 
   // post status of done and star to update database
@@ -46,27 +46,37 @@ const TaskCard = ({ initialTask }) => {
 
   // create a task-card
   return (
-    <div className="task-card" key={task.id}>
-      <input
-        className="done"
-        type="checkbox"
-        name=""
-        id=""
-        checked={task.done}
-        onChange={() => clickDone()}
-      />
+    <Draggable draggableId={task.id} index={index}>
+      {(provided) => (
+        <div
+          className="task-card"
+          key={task.id}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <input
+            className="done"
+            type="checkbox"
+            name=""
+            id=""
+            checked={task.done}
+            onChange={() => clickDone()}
+          />
 
-      <span
-        className={"title " + (task.done ? "strike-line" : "")}
-        onClick={() => clickTitle()}
-      >
-        {task.title}
-      </span>
+          <span
+            className={"title " + (task.done ? "strike-line" : "")}
+            onClick={() => clickTitle()}
+          >
+            {task.title}
+          </span>
 
-      <span className="star" onClick={() => clickStar()}>
-        {task.star ? "★" : "☆"}
-      </span>
-    </div>
+          <span className="star" onClick={() => clickStar()}>
+            {task.star ? "★" : "☆"}
+          </span>
+        </div>
+      )}
+    </Draggable>
   )
 }
 
