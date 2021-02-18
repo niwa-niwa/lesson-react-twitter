@@ -42,11 +42,14 @@ const TaskForm = () => {
           setFormData(initial_task)
           // add new task in taskList
           taskListContext.setTasks([...taskListContext.tasks, data])
-          flushMessageContext.setMessages("Added New Task")
+          flushMessageContext.putMessage(true, "Added New Task")
         })
         .catch((e) => {
           console.log(e)
-          // TODO: show error-message with flush
+          flushMessageContext.putMessage(
+            false,
+            "Something is wrong try again later"
+          )
         })
     } else {
       // for update task
@@ -58,7 +61,10 @@ const TaskForm = () => {
         })
         .catch((e) => {
           console.log(e)
-          // TODO: show error-message with flush
+          flushMessageContext.putMessage(
+            false,
+            "Something is wrong try again later"
+          )
         })
     }
   }
@@ -76,7 +82,7 @@ const TaskForm = () => {
 
   // this is for test
   const onUseRef = () => {
-    flushMessageContext.setMessages("message from flushMessageContext")
+    flushMessageContext.putMessage(false, "message from flushMessageContext")
   }
 
   return (

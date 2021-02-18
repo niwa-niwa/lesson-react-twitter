@@ -10,33 +10,37 @@ const Flush = () => {
 
   const stopDisplay = () => {
     if (div_message.current !== null) {
-      console.log(div_message.current.classList)
       // add the class for fade out animating
       div_message.current.classList.add("slidOut")
 
       setTimeout(() => {
         // set null to messages after finishing animating
-        setTimeout(flushMessageContext.setMessages(null), 1700)
-      }, 3000)
+        flushMessageContext.putMessage(null)
+      }, 1700)
     }
   }
 
-  // TODO change style when result success or error
+  // FIXME able to cue notifications
 
   const render = () => {
     // show off message automatically after 5 secondes
-    setTimeout(stopDisplay, 5000)
-    return (
-      <div
-        ref={div_message}
-        className="flush-message green"
-        onClick={() => {
-          stopDisplay()
-        }}
-      >
-        <span>{flushMessageContext.messages}</span>
-      </div>
-    )
+    return flushMessageContext.messages.map((message, index) => {
+      setTimeout(stopDisplay, 5000)
+      return (
+        <div
+          key={index}
+          ref={div_message}
+          className={
+            "flush-message " + (message.status === true ? "green" : "red")
+          }
+          onClick={() => {
+            stopDisplay()
+          }}
+        >
+          <span>{message.message}</span>
+        </div>
+      )
+    })
   }
 
   return render()

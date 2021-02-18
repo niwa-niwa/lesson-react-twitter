@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react"
 import { Draggable } from "react-beautiful-dnd"
 
+import { FlushMessageContext } from "../FlushMessageContext"
 import { FormContext } from "./FormContext"
 import tasksApi from "../../apis/tasks"
 
@@ -10,19 +11,22 @@ import "./Tasks.scss"
 const TaskCard = ({ initialTask, index }) => {
   const [task, setTask] = useState(initialTask)
   const formContext = useContext(FormContext)
+  const flushMessageContext = useContext(FlushMessageContext)
 
   // post status of done and star to update database
   const updateStatus = async (value) => {
     tasksApi
       .patch(`tasks/${value.id}`, value)
       .then(({ data }) => {
-        console.log(data)
         setTask({ ...data })
         return true
       })
       .catch((e) => {
         console.log(e)
-        // TODO: show error-message with flush
+        flushMessageContext.putMessage(
+          false,
+          "Something is wrong try again later "
+        )
         return false
       })
   }

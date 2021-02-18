@@ -4,12 +4,26 @@ import FlushMessage from "./FlushMessage"
 export const FlushMessageContext = createContext()
 
 export const FlushMessageProvider = ({ children }) => {
-  const [messages, setMessages] = useState(null)
+  const [messages, setMessages] = useState([])
+
+  /**
+   *
+   * @param {boolean} status | null for initialize
+   * @param {content of message} message
+   *
+   */
+  const putMessage = (status, message) => {
+    if (status == null) {
+      setMessages([])
+      return
+    }
+    setMessages([...messages, { status, message }])
+  }
 
   return (
-    <FlushMessageContext.Provider value={{ messages, setMessages }}>
+    <FlushMessageContext.Provider value={{ messages, putMessage }}>
       {children}
-      {messages !== null ? <FlushMessage /> : null}
+      {messages.length ? <FlushMessage /> : null}
     </FlushMessageContext.Provider>
   )
 }
