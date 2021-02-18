@@ -3,6 +3,7 @@
 - Reduxtool kit
 - Axios with Json-Server
 - Drag & Drop Area
+- Flush message
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
