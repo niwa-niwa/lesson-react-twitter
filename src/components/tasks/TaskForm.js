@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect } from "react"
 
-import _ from "lodash"
-import { generateUuid } from "../../modules/generateUuid"
-
 import { FormContext, initial_task } from "./FormContext"
-import { TaskListContext } from "./TaskListContext"
+import { useTaskList } from "./TaskListContext"
 import { useFlushMessage } from "../FlushMessageContext"
 
 import tasksApi, { deleteTask } from "../../apis/tasks"
 import { textValidator } from "../../modules/Validators"
+import { generateUuid } from "../../modules/generateUuid"
 
 import "./TaskForm.scss"
 import "../../scss/helpers.scss"
@@ -16,7 +14,7 @@ import "../../scss/helpers.scss"
 // post a task
 const TaskForm = () => {
   const formContext = useContext(FormContext)
-  const taskListContext = useContext(TaskListContext)
+  const { tasks, setTasks } = useTaskList()
   const { putMessage } = useFlushMessage()
   const [formData, setFormData] = useState(formContext.form)
 
@@ -51,7 +49,7 @@ const TaskForm = () => {
           // initialize formData
           setFormData(initial_task)
           // add new task in taskList
-          taskListContext.setTasks([...taskListContext.tasks, data])
+          setTasks([...tasks, data])
           putMessage(true, "Added New Task")
         })
         .catch((e) => {
@@ -64,7 +62,17 @@ const TaskForm = () => {
         .patch(`/tasks/${formData.id}`, formData)
         .then(({ data }) => {
           setFormData(initial_task)
-          forceReload(data)
+
+          //reload task-list forcefully
+          const newTask = tasks.map((task) => {
+            if (task.id === data.id) {
+              return (task = { ...data })
+            } else {
+              return task
+            }
+          })
+          setTasks([])
+          setTasks([...newTask])
         })
         .catch((e) => {
           console.log(e)
@@ -76,21 +84,11 @@ const TaskForm = () => {
   const onDelete = () => {
     if (deleteTask(formData.id)) {
       putMessage(true, `Deleted ${formData.title}`)
-      const newTask = taskListContext.tasks.filter((task) => {
+      const newTask = tasks.filter((task) => {
         return task.id !== formData.id
       })
-      taskListContext.setTasks([...newTask])
-      console.log(newTask)
+      setTasks([...newTask])
     } else putMessage(false, "Something is wrong try again late")
-  }
-
-  // re-rendering task-list forcefully
-  const forceReload = (data) => {
-    const list = [...taskListContext.tasks]
-    const index = _.findIndex(taskListContext.tasks, { id: data.id })
-    list.splice(index, 1, data)
-    taskListContext.setTasks([])
-    taskListContext.setTasks([...list])
   }
 
   return (
