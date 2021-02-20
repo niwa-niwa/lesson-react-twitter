@@ -7,10 +7,11 @@ import { FormContext, initial_task } from "./FormContext"
 import { TaskListContext } from "./TaskListContext"
 import { useFlushMessage } from "../FlushMessageContext"
 
-import tasksApi from "../../apis/tasks"
+import tasksApi, { deleteTask } from "../../apis/tasks"
 import { textValidator } from "../../modules/Validators"
 
 import "./TaskForm.scss"
+import "../../scss/helpers.scss"
 
 // post a task
 const TaskForm = () => {
@@ -72,6 +73,17 @@ const TaskForm = () => {
     }
   }
 
+  const onDelete = () => {
+    if (deleteTask(formData.id)) {
+      putMessage(true, `Deleted ${formData.title}`)
+      const newTask = taskListContext.tasks.filter((task) => {
+        return task.id !== formData.id
+      })
+      taskListContext.setTasks([...newTask])
+      console.log(newTask)
+    } else putMessage(false, "Something is wrong try again late")
+  }
+
   // re-rendering task-list forcefully
   const forceReload = (data) => {
     const list = [...taskListContext.tasks]
@@ -79,11 +91,6 @@ const TaskForm = () => {
     list.splice(index, 1, data)
     taskListContext.setTasks([])
     taskListContext.setTasks([...list])
-  }
-
-  // this is for test
-  const onUseRef = () => {
-    putMessage(false, "message from flushMessageContext")
   }
 
   return (
@@ -119,9 +126,13 @@ const TaskForm = () => {
           Add
         </button>
       </form>
-      {/* This is for test */}
       <br />
-      <button onClick={onUseRef}>useRef</button>
+      <button
+        className={formData.id === "" ? "display-none" : ""}
+        onClick={onDelete}
+      >
+        Delete
+      </button>
     </div>
   )
 }

@@ -46,8 +46,6 @@ const TaskCard = ({ initialTask, index }) => {
     formContext.updateForm(task)
   }
 
-  // TODO add a Delete button after done
-
   // create a task-card
   return (
     <Draggable draggableId={task.id} index={index}>
