@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useState, useContext } from "react"
 import FlushMessage from "./FlushMessage"
 
 export const FlushMessageContext = createContext()
@@ -29,3 +29,5 @@ export const FlushMessageProvider = ({ children }) => {
 }
 
 export const FlushMessageConsumer = FlushMessageContext.Consumer
+
+export const useFlushMessage = () => useContext(FlushMessageContext)
