@@ -15,7 +15,7 @@ const useTasks = () => {
       setTasks(data)
     } catch (e) {
       console.log(e)
-      // TODO: show error-message instead of task-list
+      setTasks(null)
     }
   }
 
