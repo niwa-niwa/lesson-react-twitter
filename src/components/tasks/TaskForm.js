@@ -5,9 +5,10 @@ import { generateUuid } from "../../modules/generateUuid"
 
 import { FormContext, initial_task } from "./FormContext"
 import { TaskListContext } from "./TaskListContext"
-import { FlushMessageContext } from "../FlushMessageContext"
+import { useFlushMessage } from "../FlushMessageContext"
 
 import tasksApi from "../../apis/tasks"
+import { textValidator } from "../../modules/Validators"
 
 import "./TaskForm.scss"
 
@@ -15,7 +16,7 @@ import "./TaskForm.scss"
 const TaskForm = () => {
   const formContext = useContext(FormContext)
   const taskListContext = useContext(TaskListContext)
-  const flushMessageContext = useContext(FlushMessageContext)
+  const { putMessage } = useFlushMessage()
   const [formData, setFormData] = useState(formContext.form)
 
   useEffect(() => {
@@ -33,6 +34,11 @@ const TaskForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    if (!textValidator(formData.title)) {
+      putMessage(false, "wrong Text")
+      return
+    }
+
     if (formData.id === "") {
       // for new task and add uuid
 
@@ -45,14 +51,11 @@ const TaskForm = () => {
           setFormData(initial_task)
           // add new task in taskList
           taskListContext.setTasks([...taskListContext.tasks, data])
-          flushMessageContext.putMessage(true, "Added New Task")
+          putMessage(true, "Added New Task")
         })
         .catch((e) => {
           console.log(e)
-          flushMessageContext.putMessage(
-            false,
-            "Something is wrong try again later"
-          )
+          putMessage(false, "Something is wrong try again later")
         })
     } else {
       // for update task
@@ -64,10 +67,7 @@ const TaskForm = () => {
         })
         .catch((e) => {
           console.log(e)
-          flushMessageContext.putMessage(
-            false,
-            "Something is wrong try again later"
-          )
+          putMessage(false, "Something is wrong try again later")
         })
     }
   }
@@ -85,7 +85,7 @@ const TaskForm = () => {
 
   // this is for test
   const onUseRef = () => {
-    flushMessageContext.putMessage(false, "message from flushMessageContext")
+    putMessage(false, "message from flushMessageContext")
   }
 
   return (
