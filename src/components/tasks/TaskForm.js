@@ -81,8 +81,6 @@ const TaskForm = () => {
     taskListContext.setTasks([...list])
   }
 
-  // TODO made validation
-
   // this is for test
   const onUseRef = () => {
     putMessage(false, "message from flushMessageContext")
