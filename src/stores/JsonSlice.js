@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const slice = createSlice({
-  name: "jsonSlice",
+  name: "JsonSlice",
   initialState,
   reducers: {
     setListItems: (state, action) => {
