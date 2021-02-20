@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const endpoint = "/tasks/"
+const endpoint = "tasks/"
 
 const api = axios.create({
   baseURL: "http://localhost:3001/",
