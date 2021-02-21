@@ -4,7 +4,7 @@ import { FormContext, initial_task } from "./FormContext"
 import { useTaskList } from "./TaskListContext"
 import { useFlushMessage } from "../FlushMessageContext"
 
-import tasksApi, { deleteTask } from "../../apis/tasks"
+import { postNewTask, patchTask, deleteTask } from "../../apis/TaskApi"
 import { textValidator } from "../../modules/Validators"
 import { generateUuid } from "../../modules/generateUuid"
 
@@ -26,69 +26,67 @@ const TaskForm = () => {
     if (event.target.id === "star") {
       event.target.value = !event.target.value
     }
-
     setFormData({ ...formData, [event.target.id]: event.target.value })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
+    // reject it if the title is nothing
     if (!textValidator(formData.title)) {
       putMessage(false, "wrong Text")
       return
     }
 
+    // the if-syntax decide new task or update task
     if (formData.id === "") {
       // for new task and add uuid
-
       const uuid = generateUuid()
 
-      tasksApi
-        .post("tasks", { ...formData, id: uuid })
-        .then(({ data }) => {
-          // initialize formData
-          setFormData(initial_task)
-          // add new task in taskList
-          setTasks([...tasks, data])
-          putMessage(true, "Added New Task")
-        })
-        .catch((e) => {
-          console.log(e)
-          putMessage(false, "Something is wrong try again later")
-        })
+      try {
+        const { data } = await postNewTask(formData, uuid)
+        setTasks([...tasks, data]) // add new task in taskList
+        setFormData(initial_task)
+        putMessage(true, "Added New Task")
+      } catch (e) {
+        console.error("handleSubmit-newTask=", e)
+        putMessage(false, "Something is wrong try again later")
+      }
     } else {
       // for update task
-      tasksApi
-        .patch(`/tasks/${formData.id}`, formData)
-        .then(({ data }) => {
-          setFormData(initial_task)
-
-          //reload task-list forcefully
-          const newTask = tasks.map((task) => {
-            if (task.id === data.id) {
-              return (task = { ...data })
-            } else {
-              return task
-            }
-          })
-          setTasks([])
-          setTasks([...newTask])
+      try {
+        const { data } = await patchTask(formData)
+        setFormData(initial_task)
+        const newTask = tasks.map((task) => {
+          if (task.id === data.id) {
+            return (task = { ...data })
+          } else {
+            return task
+          }
         })
-        .catch((e) => {
-          console.log(e)
-          putMessage(false, "Something is wrong try again later")
-        })
+        setTasks([])
+        setTasks([...newTask]) //reload task-list forcefully
+        putMessage(true, "Edited the task")
+      } catch (e) {
+        console.error("handleSubmit-patchTask=", e)
+        putMessage(false, "Something is wrong try again later")
+      }
     }
   }
 
-  const onDelete = () => {
-    if (deleteTask(formData.id)) {
+  const onDelete = async () => {
+    try {
+      await deleteTask(formData.id)
       putMessage(true, `Deleted ${formData.title}`)
       const newTask = tasks.filter((task) => {
         return task.id !== formData.id
       })
       setTasks([...newTask])
-    } else putMessage(false, "Something is wrong try again late")
+      setFormData(initial_task)
+    } catch (e) {
+      console.error("onDelete=", e)
+      putMessage(false, "Something is wrong try again late")
+    }
   }
 
   return (
