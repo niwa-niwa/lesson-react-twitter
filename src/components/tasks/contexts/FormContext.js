@@ -3,10 +3,13 @@ import React, { createContext, useState } from "react"
 // default value to task
 export const initial_task = {
   id: "",
+  userId: "",
   title: "",
   done: false,
   star: false,
   description: "",
+  createdAt: "",
+  updateAt: "",
 }
 
 // be called any components

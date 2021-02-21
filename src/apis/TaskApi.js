@@ -31,9 +31,9 @@ export async function deleteTask(id) {
     })
 }
 
-export async function postNewTask(formData, uuid) {
+export async function postNewTask(formData) {
   return await api
-    .post("tasks", { ...formData, id: uuid })
+    .post("tasks", formData)
     .then((response) => {
       return response
     })

@@ -1,4 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
+import firebase from "firebase/app"
+import moment from "moment"
 
 import { FormContext, initial_task } from "./contexts/FormContext"
 import { useTaskList } from "./contexts/TaskListContext"
@@ -12,6 +14,7 @@ import "./TaskForm.scss"
 
 // post a task
 const TaskForm = () => {
+  const auth = firebase.auth().currentUser
   const formContext = useContext(FormContext)
   const { tasks, setTasks } = useTaskList()
   const { putMessage } = useFlushMessage()
@@ -37,13 +40,18 @@ const TaskForm = () => {
       return
     }
 
+    // insert id and updateAt to formData
+    formData.userId = auth.uid
+    formData.updateAt = moment().format("YYYY-MM-DD HH:mm:ss")
+
     // the if-syntax decide new task or update task
     if (formData.id === "") {
-      // for new task and add uuid
-      const uuid = generateUuid()
+      // insert new task and add uuid to formData
+      formData.id = generateUuid()
+      formData.createdAt = moment().format("YYYY-MM-DD HH:mm:ss")
 
       try {
-        const { data } = await postNewTask(formData, uuid)
+        const { data } = await postNewTask(formData)
         setTasks([...tasks, data]) // add new task in taskList
         setFormData(initial_task)
         putMessage(true, "Added New Task")
