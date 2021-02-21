@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from "react"
-import FlushMessage from "./FlushMessage"
+import FlushMessage from "../components/layouts/FlushMessage"
 
 export const FlushMessageContext = createContext()
 

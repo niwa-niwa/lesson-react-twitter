@@ -1,9 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import "../scss/Header.scss"
+import "./Header.scss"
 
-import TwitterIcon from "../img/twitter-icon.png"
+import TwitterIcon from "../../img/twitter-icon.png"
 
 class Header extends React.Component {
   render() {

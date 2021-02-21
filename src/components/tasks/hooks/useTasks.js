@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getTasks } from "../../apis/TaskApi"
+import { getTasks } from "../../../apis/TaskApi"
 
 // fetch tasks
 const useTasks = () => {

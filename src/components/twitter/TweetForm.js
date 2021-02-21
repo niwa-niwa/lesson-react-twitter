@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 
 import { setTweet } from "../../stores/tweetsSlice"
 
-import "../../scss/parts/_TweetForm.scss"
+import "./TweetForm.scss"
 
 const TweetForm = () => {
   const dispatch = useDispatch()

@@ -1,15 +1,14 @@
 import React, { useState, useContext, useEffect } from "react"
 
-import { FormContext, initial_task } from "./FormContext"
-import { useTaskList } from "./TaskListContext"
-import { useFlushMessage } from "../FlushMessageContext"
+import { FormContext, initial_task } from "./contexts/FormContext"
+import { useTaskList } from "./contexts/TaskListContext"
+import { useFlushMessage } from "../../contexts/FlushMessageContext"
 
 import { postNewTask, patchTask, deleteTask } from "../../apis/TaskApi"
 import { textValidator } from "../../modules/Validators"
 import { generateUuid } from "../../modules/generateUuid"
 
 import "./TaskForm.scss"
-import "../../scss/helpers.scss"
 
 // post a task
 const TaskForm = () => {

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { getPosts } from "../stores/JsonSlice"
+import { getPosts } from "../../stores/JsonSlice"
 
-import "../scss/Json.scss"
+import "./JsonIndex.scss"
 
-const Json = () => {
+const JsonIndex = () => {
   const { posts } = useSelector((state) => state.jsonReducer)
   const dispatch = useDispatch()
 
@@ -40,4 +40,4 @@ const Json = () => {
     </div>
   )
 }
-export default Json
+export default JsonIndex

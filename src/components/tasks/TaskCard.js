@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react"
 import { Draggable } from "react-beautiful-dnd"
 
-import { useFlushMessage } from "../FlushMessageContext"
-import { FormContext } from "./FormContext"
+import { useFlushMessage } from "../../contexts/FlushMessageContext"
+import { FormContext } from "./contexts/FormContext"
 import { patchTask } from "../../apis/TaskApi"
 
 import "./Tasks.scss"

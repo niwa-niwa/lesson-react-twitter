@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react"
 
-import useTasks from "./useTasks"
+import useTasks from "../hooks/useTasks"
 
 export const TaskListContext = createContext()
 

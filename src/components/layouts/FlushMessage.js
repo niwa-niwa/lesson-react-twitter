@@ -1,8 +1,8 @@
 import React, { useContext, useRef } from "react"
 
-import { FlushMessageContext } from "./FlushMessageContext"
+import { FlushMessageContext } from "../../contexts/FlushMessageContext"
 
-import "../scss/FlushMessage.scss"
+import "./FlushMessage.scss"
 
 const Flush = () => {
   const flushMessageContext = useContext(FlushMessageContext)

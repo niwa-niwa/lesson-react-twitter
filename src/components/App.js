@@ -2,19 +2,19 @@ import React from "react"
 import { Router, Route, Switch } from "react-router-dom"
 import history from "../history"
 
-import SideNav from "./SideNav"
-import Header from "./Header"
-import Root from "./Root"
-import Footer from "./Footer"
-import Settings from "./Settings"
-import Json from "./Json"
+import SideNav from "./layouts/SideNav"
+import Header from "./layouts/Header"
+import Root from "./twitter/Root"
+import Footer from "./layouts/Footer"
+import Settings from "./settings/Settings"
+import JsonIndex from "./json/JsonIndex"
 import Tasks from "./tasks/Tasks"
 
-import { TaskListProvider } from "./tasks/TaskListContext"
-import { FormProvider } from "./tasks/FormContext"
-import { FlushMessageProvider } from "./FlushMessageContext"
+import { TaskListProvider } from "./tasks/contexts/TaskListContext"
+import { FormProvider } from "./tasks/contexts/FormContext"
+import { FlushMessageProvider } from "../contexts/FlushMessageContext"
 
-import "../scss/App.scss"
+import "./App.scss"
 
 const App = () => {
   return (
@@ -27,7 +27,7 @@ const App = () => {
             <Switch>
               <Route path="/" exact component={Root} />
               <Route path="/settings" exact component={Settings} />
-              <Route path="/json" exact component={Json} />
+              <Route path="/json" exact component={JsonIndex} />
               <TaskListProvider>
                 <FormProvider>
                   <Route path="/tasks" exact component={Tasks} />
