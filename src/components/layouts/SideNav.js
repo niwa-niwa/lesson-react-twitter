@@ -18,7 +18,10 @@ class SideNav extends React.Component {
             <div>
               <Link to="/tasks">Tasks</Link>
             </div>
-            <div>menu7</div>
+            <div>
+              {/* <Link to="/firebase">firebase</Link> */}
+              Sample
+            </div>
             <div>
               <Link to="/settings">Settings</Link>
             </div>

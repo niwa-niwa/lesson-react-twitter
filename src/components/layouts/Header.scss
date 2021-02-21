@@ -27,35 +27,12 @@
   }
 
   &__nav {
-    display: none;
-  }
-
-  &__hamburger {
     position: absolute;
     right: 0;
     display: flex;
 
     div {
       margin: 10px;
-    }
-  }
-
-  /**
-    * PC Style
-    */
-  @media screen and (min-width: $pc_width) {
-    &__nav {
-      position: absolute;
-      right: 0;
-      display: flex;
-
-      div {
-        margin: 10px;
-      }
-    }
-
-    &__hamburger {
-      display: none;
     }
   }
 }
