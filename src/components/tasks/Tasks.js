@@ -11,8 +11,6 @@ import "./TaskCard.scss"
 const Tasks = () => {
   const { tasks, setTasks } = useTaskList()
 
-  // TODO: show a dialog to input a task
-
   // re-sorted task-card
   const reorder = (tasks, startIndex, endIndex) => {
     const result = Array.from(tasks)
@@ -37,12 +35,6 @@ const Tasks = () => {
     )
 
     setTasks([...target_tasks])
-
-    // ToDo: useMemo for not re-render unnecessary task-card
-    // ToDo: rebuild data-schema to sorting-number
-    // ToDo: add sort-number when post new task
-    // ToDo: sort task-card with sort-number in task list page
-    // ToDo: send sorting-number to DB when change sort-number with D&D
   }
 
   // rendering tasks in a list

@@ -20,8 +20,6 @@ const Flush = () => {
     }
   }
 
-  // FIXME able to cue notifications
-
   const render = () => {
     // show off message automatically after 5 secondes
     return flushMessageContext.messages.map((message, index) => {

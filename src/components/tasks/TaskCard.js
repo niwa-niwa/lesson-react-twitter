@@ -7,7 +7,6 @@ import { patchTask } from "../../apis/TaskApi"
 
 import "./Tasks.scss"
 
-// TODO accordable and editable card
 const TaskCard = ({ initialTask, index }) => {
   const [task, setTask] = useState(initialTask)
   const formContext = useContext(FormContext)
