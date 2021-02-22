@@ -1,6 +1,6 @@
-import React, { createContext } from "react"
+import React, { createContext, useContext } from "react"
 
-import useTasks from "./useTasks"
+import useTasks from "../hooks/useTasks"
 
 export const TaskListContext = createContext()
 
@@ -15,3 +15,5 @@ export const TaskListProvider = ({ children }) => {
 }
 
 export const TaskListConsumer = TaskListContext.Consumer
+
+export const useTaskList = () => useContext(TaskListContext)

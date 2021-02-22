@@ -1,8 +1,7 @@
-import React, { useContext } from "react"
+import React from "react"
 import { DragDropContext, Droppable } from "react-beautiful-dnd"
 
-import { TaskListContext } from "./TaskListContext"
-
+import { useTaskList } from "./contexts/TaskListContext"
 import TaskCard from "./TaskCard"
 import TaskForm from "./TaskForm"
 import AddNewButton from "./AddNewButton"
@@ -10,9 +9,7 @@ import AddNewButton from "./AddNewButton"
 import "./TaskCard.scss"
 
 const Tasks = () => {
-  const taskListContext = useContext(TaskListContext)
-
-  // TODO: show a dialog to input a task
+  const { tasks, setTasks } = useTaskList()
 
   // re-sorted task-card
   const reorder = (tasks, startIndex, endIndex) => {
@@ -32,17 +29,26 @@ const Tasks = () => {
     }
 
     const target_tasks = reorder(
-      taskListContext.tasks,
+      tasks,
       result.source.index,
       result.destination.index
     )
 
-    taskListContext.setTasks([...target_tasks])
+    setTasks([...target_tasks])
   }
 
   // rendering tasks in a list
   const renderingList = () => {
-    return taskListContext.tasks.map((task, index) => {
+    if (tasks === null) {
+      // when can connect the internet
+      return <div>Something is wrong try again late</div>
+    }
+    if (tasks.length === 0) {
+      // task is 0
+      return <div>Task is nothing</div>
+    }
+
+    return tasks.map((task, index) => {
       return <TaskCard initialTask={task} index={index} key={task.id} />
     })
   }

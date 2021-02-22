@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react"
-import tasksApi from "../../apis/tasks"
+import { getTasks } from "../../../apis/TaskApi"
 
 // fetch tasks
 const useTasks = () => {
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
-    getTasks()
+    _getTasks()
   }, [])
 
-  const getTasks = async () => {
+  const _getTasks = async () => {
     try {
-      const { data } = await tasksApi.get("tasks")
+      const { data } = await getTasks()
       setTasks(data)
     } catch (e) {
-      console.log(e)
-      // TODO: show error-message with flush
+      console.log("_getTasks=", e)
+      setTasks(null)
     }
   }
 

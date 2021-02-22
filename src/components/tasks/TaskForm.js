@@ -1,17 +1,23 @@
 import React, { useState, useContext, useEffect } from "react"
-import _ from "lodash"
+import firebase from "firebase/app"
+import moment from "moment"
 
-import { FormContext, initial_task } from "./FormContext"
-import { TaskListContext } from "./TaskListContext"
+import { FormContext, initial_task } from "./contexts/FormContext"
+import { useTaskList } from "./contexts/TaskListContext"
+import { useFlushMessage } from "../../contexts/FlushMessageContext"
 
-import tasksApi from "../../apis/tasks"
+import { postNewTask, patchTask, deleteTask } from "../../apis/TaskApi"
+import { textValidator } from "../../modules/Validators"
+import { generateUuid } from "../../modules/generateUuid"
 
 import "./TaskForm.scss"
 
 // post a task
 const TaskForm = () => {
+  const auth = firebase.auth().currentUser
   const formContext = useContext(FormContext)
-  const taskListContext = useContext(TaskListContext)
+  const { tasks, setTasks } = useTaskList()
+  const { putMessage } = useFlushMessage()
   const [formData, setFormData] = useState(formContext.form)
 
   useEffect(() => {
@@ -22,54 +28,73 @@ const TaskForm = () => {
     if (event.target.id === "star") {
       event.target.value = !event.target.value
     }
-
     setFormData({ ...formData, [event.target.id]: event.target.value })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (formData.id === "") {
-      // for new task and add uuid
-      const uuid = generateUuid()
+    // reject it if the title is nothing
+    if (!textValidator(formData.title)) {
+      putMessage(false, "wrong Text")
+      return
+    }
 
-      tasksApi
-        .post("tasks", { ...formData, id: uuid })
-        .then(({ data }) => {
-          // initialize formData
-          setFormData(initial_task)
-          // add new task in taskList
-          taskListContext.setTasks([...taskListContext.tasks, data])
-        })
-        .catch((e) => {
-          console.log(e)
-          // TODO: show error-message with flush
-        })
+    // insert id and updateAt to formData
+    formData.userId = auth.uid
+    formData.updateAt = moment().format("YYYY-MM-DD HH:mm:ss")
+
+    // the if-syntax decide new task or update task
+    if (formData.id === "") {
+      // insert new task and add uuid to formData
+      formData.id = generateUuid()
+      formData.createdAt = moment().format("YYYY-MM-DD HH:mm:ss")
+
+      try {
+        const { data } = await postNewTask(formData)
+        setTasks([...tasks, data]) // add new task in taskList
+        setFormData(initial_task)
+        putMessage(true, "Added New Task")
+      } catch (e) {
+        console.error("handleSubmit-newTask=", e)
+        putMessage(false, "Something is wrong try again later")
+      }
     } else {
       // for update task
-      tasksApi
-        .patch(`/tasks/${formData.id}`, formData)
-        .then(({ data }) => {
-          setFormData(initial_task)
-          forceReload(data)
+      try {
+        const { data } = await patchTask(formData)
+        setFormData(initial_task)
+        const newTask = tasks.map((task) => {
+          if (task.id === data.id) {
+            return (task = { ...data })
+          } else {
+            return task
+          }
         })
-        .catch((e) => {
-          console.log(e)
-          // TODO: show error-message with flush
-        })
+        setTasks([])
+        setTasks([...newTask]) //reload task-list forcefully
+        putMessage(true, "Edited the task")
+      } catch (e) {
+        console.error("handleSubmit-patchTask=", e)
+        putMessage(false, "Something is wrong try again later")
+      }
     }
   }
 
-  // re-rendering task-list forcefully
-  const forceReload = (data) => {
-    const list = [...taskListContext.tasks]
-    const index = _.findIndex(taskListContext.tasks, { id: data.id })
-    list.splice(index, 1, data)
-    taskListContext.setTasks([])
-    taskListContext.setTasks([...list])
+  const onDelete = async () => {
+    try {
+      await deleteTask(formData.id)
+      putMessage(true, `Deleted ${formData.title}`)
+      const newTask = tasks.filter((task) => {
+        return task.id !== formData.id
+      })
+      setTasks([...newTask])
+      setFormData(initial_task)
+    } catch (e) {
+      console.error("onDelete=", e)
+      putMessage(false, "Something is wrong try again late")
+    }
   }
-
-  // TODO made validation
 
   return (
     <div className="task-form-wrap">
@@ -104,27 +129,14 @@ const TaskForm = () => {
           Add
         </button>
       </form>
+      <br />
+      <button
+        className={formData.id === "" ? "display-none" : ""}
+        onClick={onDelete}
+      >
+        Delete
+      </button>
     </div>
   )
 }
 export default TaskForm
-
-// made UUID
-function generateUuid() {
-  // https://github.com/GoogleChrome/chrome-platform-analytics/blob/master/src/internal/identifier.js
-  // const FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
-  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("")
-  for (let i = 0, len = chars.length; i < len; i++) {
-    switch (chars[i]) {
-      case "x":
-        chars[i] = Math.floor(Math.random() * 16).toString(16)
-        break
-      case "y":
-        chars[i] = (Math.floor(Math.random() * 4) + 8).toString(16)
-        break
-      default:
-        break
-    }
-  }
-  return chars.join("")
-}

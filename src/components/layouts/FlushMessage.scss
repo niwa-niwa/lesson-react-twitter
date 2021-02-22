@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+@import "../../scss/Const.scss";
+
+/* CSSアニメーションの設定 */
+@keyframes SlideIn {
+  0% {
+    opacity: 0; /*初期状態では透明に*/
+    transform: translateX(64px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.flush-message {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  bottom: calc(#{$footer_height} + 8px);
+  right: 10px;
+  width: 264px;
+  min-height: 60px;
+  font-size: 16px;
+  padding: 6px 14px;
+  background-color: #ececec;
+  border-radius: 8px;
+  box-shadow: 0 8px 3px -3px gainsboro;
+  animation: SlideIn 1.6s;
+}
+
+.red {
+  background-color: #ffaaaa;
+}
+
+.green {
+  background-color: #c7ff90;
+}
+
+.slidOut {
+  transition: opacity 1s;
+  opacity: 0;
+}

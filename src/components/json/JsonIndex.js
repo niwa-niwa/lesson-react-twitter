@@ -1,17 +1,17 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { getPosts } from "../stores/jsonSlice"
+import { getPosts } from "../../stores/JsonSlice"
 
-import "../scss/Json.scss"
+import "./JsonIndex.scss"
 
-const Json = () => {
+const JsonIndex = () => {
   const { posts } = useSelector((state) => state.jsonReducer)
   const dispatch = useDispatch()
 
   //give seconde argument dispatch the useEffect execute only first mounted
   useEffect(() => {
-    //argument async function from jsonSlice.js
+    //argument async function from JsonSlice.js
     dispatch(getPosts())
   }, [dispatch])
 
@@ -40,4 +40,4 @@ const Json = () => {
     </div>
   )
 }
-export default Json
+export default JsonIndex

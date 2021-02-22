@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+@import "../../scss/Const.scss";
+
+/**
+* SP Style
+*/
+.header {
+  &__wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: $header_height;
+    box-shadow: -1px -1px 5px 0;
+    background-color: $layout_color;
+    z-index: 10;
+  }
+
+  &__inner {
+    position: relative;
+    display: flex;
+
+    img {
+      width: $header_height;
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    right: 0;
+    display: flex;
+
+    div {
+      margin: 10px;
+    }
+  }
+}

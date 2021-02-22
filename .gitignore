@@ -26,3 +26,5 @@ src/img/*
 
 mock/server/node_modules
 mock/server/db.json
+TODO
+.env

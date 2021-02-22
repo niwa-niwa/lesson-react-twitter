@@ -1,12 +1,11 @@
 import React from "react"
 import { useSelector } from "react-redux"
 
-import TweetForm from "./parts/TweetForm"
+import TweetForm from "./TweetForm"
 
-import "../scss/Main.scss"
-import "../scss/parts/_TwitterCard.scss"
+import "./Main.scss"
 
-import Person from "../img/person-icon.png"
+import Person from "../../img/person-icon.png"
 
 const Main = () => {
   const { tweets } = useSelector((state) => state.tweetsReducer)

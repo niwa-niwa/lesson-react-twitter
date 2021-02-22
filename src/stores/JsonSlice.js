@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
-import json_axios from "../apis/json"
+import json_axios from "../apis/JsonApi"
 
 const initialState = {
   posts: [],
 }
 
 const slice = createSlice({
-  name: "jsonSlice",
+  name: "JsonSlice",
   initialState,
   reducers: {
     setListItems: (state, action) => {

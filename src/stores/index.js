@@ -2,12 +2,12 @@ import { combineReducers } from "redux"
 import { configureStore } from "@reduxjs/toolkit"
 
 import tweetSlice from "./tweetsSlice"
-import jsonSlice from "./jsonSlice"
+import JsonSlice from "./JsonSlice"
 
 // combine slices that were made createSlice
 const reducer = combineReducers({
   tweetsReducer: tweetSlice.reducer,
-  jsonReducer: jsonSlice.reducer,
+  jsonReducer: JsonSlice.reducer,
 })
 
 // register reducer to store for Providing App.js

@@ -1,30 +1,27 @@
 import React, { useState, useContext } from "react"
 import { Draggable } from "react-beautiful-dnd"
 
-import { FormContext } from "./FormContext"
-import tasksApi from "../../apis/tasks"
+import { useFlushMessage } from "../../contexts/FlushMessageContext"
+import { FormContext } from "./contexts/FormContext"
+import { patchTask } from "../../apis/TaskApi"
 
 import "./Tasks.scss"
 
-// TODO accordable and editable card
 const TaskCard = ({ initialTask, index }) => {
   const [task, setTask] = useState(initialTask)
   const formContext = useContext(FormContext)
+  const { putMessage } = useFlushMessage()
 
   // post status of done and star to update database
   const updateStatus = async (value) => {
-    tasksApi
-      .patch(`tasks/${value.id}`, value)
-      .then(({ data }) => {
-        console.log(data)
-        setTask({ ...data })
-        return true
-      })
-      .catch((e) => {
-        console.log(e)
-        // TODO: show error-message with flush
-        return false
-      })
+    try {
+      const { data } = await patchTask(value)
+      setTask({ ...data })
+      putMessage(true, "update status")
+    } catch (e) {
+      console.log(e)
+      putMessage(false, "Something is wrong try again later ")
+    }
   }
 
   // Change  status done to the task by click
@@ -41,8 +38,6 @@ const TaskCard = ({ initialTask, index }) => {
   const clickTitle = () => {
     formContext.updateForm(task)
   }
-
-  // TODO add a Delete button after done
 
   // create a task-card
   return (

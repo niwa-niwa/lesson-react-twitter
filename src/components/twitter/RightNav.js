@@ -1,6 +1,6 @@
 import React from "react"
 
-import "../scss/RightNav.scss"
+import "./RightNav.scss"
 
 class RightNav extends React.Component {
   render() {
