@@ -5,15 +5,19 @@ import { setTweet } from "../../stores/tweetsSlice"
 
 import "./TweetForm.scss"
 
+
 const TweetForm = () => {
+
   const dispatch = useDispatch()
 
   const [inputTweet, setInputTweet] = useState("")
+
 
   const handleChange = (event) => {
     console.log(event.target.value)
     setInputTweet(event.target.value)
   }
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -21,15 +25,17 @@ const TweetForm = () => {
     setInputTweet("")
   }
 
+
   return (
-    <div className="tweet-form">
+    <div className="tweet-form" data-testid="tweet-form">
       <form className="tweet-form__form" onSubmit={handleSubmit}>
         <textarea
           placeholder="write your feel"
           value={inputTweet}
           onChange={handleChange}
+          data-testid="tweet-form-textarea"
         />
-        <button type="submit" value="Submit">
+        <button type="submit" value="Submit" data-testid="tweet-form-submit">
           Tweet
         </button>
       </form>
