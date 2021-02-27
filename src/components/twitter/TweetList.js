@@ -32,7 +32,7 @@ const TweetList = () => {
           </div>
           <div className="twitter-card__main">
             <div>
-              <span className="username" data-testid={`card-username-${index}`} >{tweet.id}</span>
+              <span className="username" data-testid={`card-username-${index}`} >{tweet.userId}</span>
               <span className="date" data-testid={`card-created_at-${index}`} >{tweet.createdAt}</span>
             </div>
             <div>

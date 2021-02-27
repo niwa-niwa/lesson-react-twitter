@@ -1,66 +1,86 @@
 import React from 'react'
 import { render, screen, cleanup} from '@testing-library/react'
+import '@testing-library/jest-dom'
 import userEvent from "@testing-library/user-event"
-import { rest } from "msw"
-import { setupServer } from "msw/node"
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 
-import tweetSlice from "../../../stores/tweetsSlice"
-import jsonSlice from "../../../stores/JsonSlice"
+import { FirebaseAuthProvider } from "@react-firebase/auth"
+import firebase from "firebase/app"
+import "firebase/auth"
+import firebase_config from "../../../apis/Firebase"
 
-import Main from '../Main'
+import tweetReducer, { BASE_URL, ENDPOINT } from "../tweetSlice"
+import TweetList from '../TweetList'
 
-describe("Tweet-Main-component test cases", () => {
+import server from "./tweetMock"
+import { rest } from "msw"
 
-  let store;
+
+
+describe("Tweet-TweetList-component test cases", () => {
+
+  // ready to server
+  beforeAll(()=>{
+    server.listen()
+  })
+
   beforeEach(() => {
 
     // ready to redux store
-    store = configureStore({
+    let store = configureStore({
       reducer: {
-        tweetsReducer: tweetSlice.reducer,
-        jsonReducer: jsonSlice.reducer
+        tweet: tweetReducer,
       },
-    });
+    })
 
     // ready to routing
     render(
       <Provider store={store}>
-        <Main />
+        <FirebaseAuthProvider firebase={firebase} {...firebase_config}>
+          <TweetList />
+        </FirebaseAuthProvider>
       </Provider>
     )
-  });
+  })
+
+  afterEach(() => {
+    server.resetHandlers
+    cleanup()
+  })
+
+  afterAll(() => {
+    server.close()
+  })
 
 
-  afterEach(cleanup)
-
-
-it("1 :render all the elements correctly",  ()=> {
-    
+  it("1 :render all the elements correctly", async () => {
     // display source that is complied js
-    // screen.debug()
 
     // Twitter-form test
     expect(screen.getByTestId("tweet-form")).toBeTruthy()
     expect(screen.getByTestId("tweet-form-textarea")).toBeTruthy()
     expect(screen.getByTestId("tweet-form-submit")).toBeTruthy()
-    
+
     // Twitter-card test
     expect(screen.getByTestId("twitter-card-0")).toBeTruthy()
     expect(screen.getByTestId("card-img-0")).toBeTruthy()
     expect(screen.getByTestId("card-username-0")).toBeTruthy()
     expect(screen.getByTestId("card-created_at-0")).toBeTruthy()
     expect(screen.getByTestId("card-content-0")).toBeTruthy()
-    
+
     // Twitter-card test to have text
-    expect(screen.getByText("first-user")).toBeTruthy()
-    expect(screen.getByText("2020-01-31")).toBeTruthy()
-    expect(screen.getByText("1回目のツイート")).toBeTruthy()
+    expect(
+      await screen.findByText("sHAh8LFuTqTpmOPU77erhXaAf0s2")
+    ).toBeInTheDocument()
+    expect(await screen.findByText("2021-02-21 17:16:27")).toBeInTheDocument()
+    expect(
+      await screen.findByText("This is a mock message")
+    ).toBeInTheDocument()
   })
 
-  it("2 :Twitter Form test", () => {
-    // screen.debug()
+
+  it("2 :Twitter Form test", async () => {
     const tweet = "test tweet to me"
 
     // not display new tweet data
@@ -77,16 +97,16 @@ it("1 :render all the elements correctly",  ()=> {
     userEvent.click(screen.getByTestId("tweet-form-submit"))
 
     // appear new element
-    expect(screen.getByTestId("twitter-card-1")).toBeTruthy()
+    expect(await screen.findByTestId("twitter-card-1")).toBeTruthy()
     expect(screen.getByTestId("card-img-1")).toBeTruthy()
     expect(screen.getByTestId("card-username-1")).toBeTruthy()
     expect(screen.getByTestId("card-created_at-1")).toBeTruthy()
     expect(screen.getByTestId("card-content-1")).toBeTruthy()
 
     // display new tweet-data
-    expect(screen.getByTestId("card-username-1").textContent).toBe("first-user")
-    expect(screen.getByTestId("card-created_at-1").textContent).toBe("2020-01-31")
-    expect(screen.getByTestId("card-content-1").textContent).toBe(tweet)
+    expect(screen.getByTestId("card-username-0").textContent).toBe("sHAh8LFuTqTpmOPU77erhXaAf0s2")
+    expect(screen.getByTestId("card-created_at-0").textContent).toBe("2021-02-27 22:40:38")
+    expect(screen.getByTestId("card-content-0").textContent).toBe(tweet)
 
   })
 

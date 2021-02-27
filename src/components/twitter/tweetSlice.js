@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from 'axios'
 
 
-const BASE_URL = "http://localhost:3001/"
-const ENDPOINT = "tweets/"
+export const BASE_URL = "http://localhost:3001/"
+export const ENDPOINT = "tweets/"
 export const tweetAxios = axios.create({baseURL:BASE_URL})
 
 
