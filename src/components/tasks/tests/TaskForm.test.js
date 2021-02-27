@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event"
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 
-import tweetSlice from "../../../stores/tweetsSlice"
+import tweetReducer from "../../twitter/tweetSlice"
 import jsonSlice from "../../../stores/JsonSlice"
 
 import { TaskListProvider, useTaskList } from "../contexts/TaskListContext"
@@ -29,7 +29,7 @@ describe("TaskForm", () => {
   beforeEach(() => {
     store = configureStore({
       reducer: {
-        tweetsReducer: tweetSlice.reducer,
+        tweet: tweetReducer,
         jsonReducer: jsonSlice.reducer
       },
     });

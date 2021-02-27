@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { getPosts } from "../../stores/JsonSlice"
+import { getPosts } from "../../store/JsonSlice"
 
 import "./JsonIndex.scss"
 

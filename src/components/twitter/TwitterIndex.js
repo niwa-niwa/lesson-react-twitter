@@ -1,17 +1,17 @@
 import React from "react"
 
-import Main from "./Main"
+import TweetList from "./TweetList"
 import RightNav from "./RightNav"
 
-class Root extends React.Component {
-  render() {
+
+const TwitterIndex = () =>{
+
     return (
       <React.Fragment>
-        <Main />
+        <TweetList />
         <RightNav />
       </React.Fragment>
     )
-  }
-}
 
-export default Root
+}
+export default TwitterIndex
