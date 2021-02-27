@@ -7,7 +7,7 @@ import Header from "./layouts/Header"
 import TwitterIndex from "./twitter/TwitterIndex"
 import Footer from "./layouts/Footer"
 import Settings from "./settings/Settings"
-// import JsonIndex from "./json/JsonIndex"
+import JsonIndex from "./json/JsonIndex"
 import Tasks from "./tasks/Tasks"
 
 import { FirebaseAuthProvider } from "@react-firebase/auth"
@@ -33,7 +33,7 @@ const App = () => {
               <Switch>
                 <Route path="/" exact component={TwitterIndex} />
                 <Route path="/settings" exact component={Settings} />
-                {/* <Route path="/json" exact component={JsonIndex} /> */}
+                <Route path="/json" exact component={JsonIndex} />
                 <TaskListProvider>
                   <FormProvider>
                     <Route path="/tasks" exact component={Tasks} />

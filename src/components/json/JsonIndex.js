@@ -1,23 +1,29 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
-import { getPosts } from "../../store/JsonSlice"
+import { posts, fetchAsyncGetJson} from "./jsonSlice"
 
 import "./JsonIndex.scss"
 
+
 const JsonIndex = () => {
-  const { posts } = useSelector((state) => state.jsonReducer)
+  const _posts = useSelector(posts)
   const dispatch = useDispatch()
+
 
   //give seconde argument dispatch the useEffect execute only first mounted
   useEffect(() => {
     //argument async function from JsonSlice.js
-    dispatch(getPosts())
+    const getJson = async () => {
+      await dispatch(fetchAsyncGetJson())
+    }
+    getJson()
+
   }, [dispatch])
 
+
   const renderList = () => {
-    if (posts.length > 1) {
-      return posts.map((post, index) => {
+    if (_posts.length > 1) {
+      return _posts.map((post, index) => {
         return (
           <div key={index}>
             <div>{`userID = ${post.userId}`}</div>
@@ -31,6 +37,7 @@ const JsonIndex = () => {
       return <p>nothing is post</p>
     }
   }
+
 
   return (
     <div className="json-main">
