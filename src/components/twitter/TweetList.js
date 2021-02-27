@@ -1,5 +1,6 @@
-import React from "react"
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { tweets, fetchAsyncGet } from "./tweetSlice"
 
 import TweetForm from "./TweetForm"
 
@@ -8,13 +9,22 @@ import "./Main.scss"
 import Person from "../../img/person-icon.png"
 
 
-const Main = () => {
+const TweetList = () => {
 
-  const { tweets } = useSelector((state) => state.tweetsReducer)
+  const _tweets = useSelector(tweets)
+  const dispatch = useDispatch()
+
+
+  useEffect(()=>{
+    const getTasks = async ()=>{
+      await dispatch(fetchAsyncGet())
+    }
+    getTasks()
+  }, [dispatch])
 
 
   const renderList = () => {
-    return tweets.map((tweet, index) => {
+    return _tweets.map((tweet, index) => {
       return (
         <div className="twitter-card" key={tweet.id} data-testid={`twitter-card-${index}`}>
           <div className="twitter-card__left">
@@ -22,8 +32,8 @@ const Main = () => {
           </div>
           <div className="twitter-card__main">
             <div>
-              <span className="username" data-testid={`card-username-${index}`} >{tweet.user.name}</span>
-              <span className="date" data-testid={`card-created_at-${index}`} >{tweet.created_at}</span>
+              <span className="username" data-testid={`card-username-${index}`} >{tweet.userId}</span>
+              <span className="date" data-testid={`card-created_at-${index}`} >{tweet.createdAt}</span>
             </div>
             <div>
               <span className="tweet" data-testid={`card-content-${index}`} >{tweet.content}</span>
@@ -42,4 +52,4 @@ const Main = () => {
   )
 }
 
-export default Main
+export default TweetList

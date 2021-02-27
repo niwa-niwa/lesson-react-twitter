@@ -4,7 +4,7 @@ import history from "../history"
 
 import SideNav from "./layouts/SideNav"
 import Header from "./layouts/Header"
-import Root from "./twitter/Root"
+import TwitterIndex from "./twitter/TwitterIndex"
 import Footer from "./layouts/Footer"
 import Settings from "./settings/Settings"
 import JsonIndex from "./json/JsonIndex"
@@ -31,7 +31,7 @@ const App = () => {
             <div className="content__inner">
               <SideNav />
               <Switch>
-                <Route path="/" exact component={Root} />
+                <Route path="/" exact component={TwitterIndex} />
                 <Route path="/settings" exact component={Settings} />
                 <Route path="/json" exact component={JsonIndex} />
                 <TaskListProvider>

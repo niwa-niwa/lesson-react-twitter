@@ -1,28 +1,41 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
+import firebase from "firebase/app"
+import moment from "moment"
+import { generateUuid } from "../../modules/generateUuid"
 
-import { setTweet } from "../../stores/tweetsSlice"
+import { fetchAsyncPost } from "./tweetSlice"
 
 import "./TweetForm.scss"
 
 
 const TweetForm = () => {
-
   const dispatch = useDispatch()
-
-  const [inputTweet, setInputTweet] = useState("")
+  const auth = firebase.auth().currentUser
+  const [content, setContent] = useState("")
 
 
   const handleChange = (event) => {
-    console.log(event.target.value)
-    setInputTweet(event.target.value)
+    setContent(event.target.value)
   }
 
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(setTweet(inputTweet))
-    setInputTweet("")
+
+    dispatch(
+      fetchAsyncPost(
+        {
+          "id": generateUuid(),
+          "userId": (auth===null) ? 0 : auth.uid,
+          "content": content,
+          "createdAt": moment().format("YYYY-MM-DD HH:mm:ss"),
+          "updateAt": moment().format("YYYY-MM-DD HH:mm:ss")
+        }
+      )
+    )
+
+    setContent("")
   }
 
 
@@ -31,7 +44,7 @@ const TweetForm = () => {
       <form className="tweet-form__form" onSubmit={handleSubmit}>
         <textarea
           placeholder="write your feel"
-          value={inputTweet}
+          value={content}
           onChange={handleChange}
           data-testid="tweet-form-textarea"
         />
