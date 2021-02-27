@@ -2,10 +2,21 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { posts, fetchAsyncGetJson} from "./jsonSlice"
 
-import "./JsonIndex.scss"
+import styled from 'styled-components'
 
+
+//it's mystery give the width value something effected just fit layout
+const JsonMain = styled.div`
+  height: 100%;
+  width: 250px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background-color: #8EB8FF;
+  padding: 10px 20px;
+`
 
 const JsonIndex = () => {
+
   const _posts = useSelector(posts)
   const dispatch = useDispatch()
 
@@ -40,11 +51,11 @@ const JsonIndex = () => {
 
 
   return (
-    <div className="json-main">
+    <JsonMain>
       <p>Json Page | data from https://jsonplaceholder.typicode.com/</p>
       <br />
       {renderList()}
-    </div>
+    </JsonMain>
   )
 }
 export default JsonIndex
