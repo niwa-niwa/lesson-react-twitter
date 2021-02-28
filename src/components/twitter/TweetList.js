@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { tweets, fetchAsyncGet } from "./tweetSlice"
+import { tweets, fetchAsyncGet, fetchAsyncDelete } from "./tweetSlice"
 
 import TweetForm from "./TweetForm"
 
@@ -16,29 +16,44 @@ const TweetList = () => {
 
 
   useEffect(()=>{
-    const getTasks = async ()=>{
+    const getTasks = async () => {
       await dispatch(fetchAsyncGet())
     }
     getTasks()
   }, [dispatch])
 
+  const deleteTweet = async (id) => {
+    await dispatch(fetchAsyncDelete(id))
+    console.log("completed Delete tweet")
+  }
 
   const renderList = () => {
     return _tweets.map((tweet, index) => {
       return (
-        <div className="twitter-card" key={tweet.id} data-testid={`twitter-card-${index}`}>
+        <div
+          className="twitter-card"
+          key={tweet.id}
+          data-testid={`twitter-card-${index}`}
+        >
           <div className="twitter-card__left">
-            <img src={Person} alt="" data-testid={`card-img-${index}`}/>
+            <img src={Person} alt="" data-testid={`card-img-${index}`} />
           </div>
           <div className="twitter-card__main">
             <div>
-              <span className="username" data-testid={`card-username-${index}`} >{tweet.userId}</span>
-              <span className="date" data-testid={`card-created_at-${index}`} >{tweet.createdAt}</span>
+              <span className="username" data-testid={`card-username-${index}`}>
+                {tweet.userId}
+              </span>
+              <span className="date" data-testid={`card-created_at-${index}`}>
+                {tweet.createdAt}
+              </span>
             </div>
             <div>
-              <span className="tweet" data-testid={`card-content-${index}`} >{tweet.content}</span>
+              <span className="tweet" data-testid={`card-content-${index}`}>
+                {tweet.content}
+              </span>
             </div>
           </div>
+          <button onClick={() => deleteTweet(tweet.id)}>削除</button>
         </div>
       )
     })
