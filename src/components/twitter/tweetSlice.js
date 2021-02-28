@@ -51,7 +51,7 @@ const tweetSlice = createSlice({
     builder.addCase(fetchAsyncGet.fulfilled, (state, action) => {
       return{
         ...state,
-        tweets: action.payload,
+        tweets: [...action.payload.reverse()],
       }
     })
     builder.addCase(fetchAsyncPost.fulfilled, (state, action)=>{
