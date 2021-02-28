@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { tweets, fetchAsyncGet, fetchAsyncDelete } from "./tweetSlice"
+import { FirebaseAuthConsumer } from "@react-firebase/auth"
 
 import TweetForm from "./TweetForm"
 
@@ -53,7 +54,17 @@ const TweetList = () => {
               </span>
             </div>
           </div>
-          <button onClick={() => deleteTweet(tweet.id)}>削除</button>
+
+          <FirebaseAuthConsumer>
+            {({ isSignedIn, user }) => {
+              if (isSignedIn && user.uid === tweet.userId) {
+                return (
+                  <button onClick={() => deleteTweet(tweet.id)}>削除</button>
+                )
+              }
+            }}
+          </FirebaseAuthConsumer>
+
         </div>
       )
     })
