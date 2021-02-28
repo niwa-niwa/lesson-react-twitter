@@ -23,12 +23,17 @@ const handlers = [
     return res(
       ctx.status(201),
       ctx.json({
-        id: '92a4651b-cccb-40a1-9a65-0d582eac8579',
+        id: "92a4651b-cccb-40a1-9a65-0d582eac8579",
         userId: "sHAh8LFuTqTpmOPU77erhXaAf0s2",
-        content: 'test tweet to me',
-        createdAt: '2021-02-27 22:40:38',
-        updateAt: '2021-02-27 22:40:38'
+        content: "test tweet to me",
+        createdAt: "2021-02-27 22:40:38",
+        updateAt: "2021-02-27 22:40:38",
       })
+    )
+  }),
+  rest.delete(BASE_URL + ENDPOINT + "4cd2/", (req, res, ctx) => {
+    return res(
+      ctx.status(201)
     )
   }),
 ]
