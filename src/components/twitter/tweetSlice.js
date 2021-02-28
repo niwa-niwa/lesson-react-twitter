@@ -19,6 +19,16 @@ export const fetchAsyncPost = createAsyncThunk("tweet/post", async (body) => {
 })
 
 
+export const fetchAsyncDelete = createAsyncThunk(
+  "tweet/delete",
+  async (id) => {
+    console.log('DELETE', id)
+    const response = await tweetAxios.delete(ENDPOINT+id)
+    console.log("DELETE_RESPONSE",response)
+    return id
+  }
+)
+
 const tweetSlice = createSlice({
 
   name: "tweet",
@@ -41,13 +51,22 @@ const tweetSlice = createSlice({
     builder.addCase(fetchAsyncGet.fulfilled, (state, action) => {
       return{
         ...state,
-        tweets: action.payload,
+        tweets: [...action.payload.reverse()],
       }
     })
     builder.addCase(fetchAsyncPost.fulfilled, (state, action)=>{
       return{
         ...state,
         tweets: [action.payload, ...state.tweets]
+      }
+    })
+    builder.addCase(fetchAsyncDelete.fulfilled, (state, action)=>{
+      const new_state = state.tweets.filter((tweet) => {
+        return tweet.id !== action.payload
+      })
+      return{
+        ...state,
+        tweets: [...new_state]
       }
     })
   },
