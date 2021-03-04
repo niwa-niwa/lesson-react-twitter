@@ -5,10 +5,10 @@ import useTasks from "../hooks/useTasks"
 export const TaskListContext = createContext()
 
 export const TaskListProvider = ({ children }) => {
-  const [tasks, setTasks] = useTasks([])
+  const [tasks, putTasks] = useTasks([])
 
   return (
-    <TaskListContext.Provider value={{ tasks, setTasks }}>
+    <TaskListContext.Provider value={{ tasks, putTasks }}>
       {children}
     </TaskListContext.Provider>
   )
