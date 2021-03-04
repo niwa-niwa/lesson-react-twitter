@@ -16,7 +16,7 @@ import "./TaskForm.scss"
 const TaskForm = () => {
   const auth = firebase.auth().currentUser
   const formContext = useContext(FormContext)
-  const { tasks, setTasks } = useTaskList()
+  const { tasks, putTasks } = useTaskList()
   const { putMessage } = useFlushMessage()
   const [formData, setFormData] = useState(formContext.form)
 
@@ -52,7 +52,7 @@ const TaskForm = () => {
 
       try {
         const { data } = await postNewTask(formData)
-        setTasks([...tasks, data]) // add new task in taskList
+        putTasks([data, ...tasks]) // add new task in taskList
         setFormData(initial_task)
         putMessage(true, "Added New Task")
       } catch (e) {
@@ -71,8 +71,8 @@ const TaskForm = () => {
             return task
           }
         })
-        setTasks([])
-        setTasks([...newTask]) //reload task-list forcefully
+        putTasks([])
+        putTasks([...newTask]) //reload task-list forcefully
         putMessage(true, "Edited the task")
       } catch (e) {
         console.error("handleSubmit-patchTask=", e)
@@ -88,7 +88,7 @@ const TaskForm = () => {
       const newTask = tasks.filter((task) => {
         return task.id !== formData.id
       })
-      setTasks([...newTask])
+      putTasks([...newTask])
       setFormData(initial_task)
     } catch (e) {
       console.error("onDelete=", e)

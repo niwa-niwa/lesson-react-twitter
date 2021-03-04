@@ -9,7 +9,7 @@ import AddNewButton from "./AddNewButton"
 import "./TaskCard.scss"
 
 const Tasks = () => {
-  const { tasks, setTasks } = useTaskList()
+  const { tasks, putTasks } = useTaskList()
 
   // re-sorted task-card
   const reorder = (tasks, startIndex, endIndex) => {
@@ -34,7 +34,7 @@ const Tasks = () => {
       result.destination.index
     )
 
-    setTasks([...target_tasks])
+    putTasks([...target_tasks])
   }
 
   // rendering tasks in a list
